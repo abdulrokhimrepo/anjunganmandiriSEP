@@ -27,9 +27,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
+import javax.print.attribute.standard.MediaPrintableArea;
+import javax.print.attribute.standard.MediaSize;
+import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -61,6 +66,7 @@ import uz.ncipro.calendar.JDateTimePicker;
 public final class validasi {
 
     private int a, j, i, result = 0;
+
     private String s, s1, auto, PEMBULATANHARGAOBAT = koneksiDB.PEMBULATANHARGAOBAT();
     private final Connection connect = koneksiDB.condb();
     private final sekuel sek = new sekuel();
@@ -810,6 +816,44 @@ public final class validasi {
         }
     }
 
+    public void MyReportSilentPrint(String reportName, Map parameters, String title) {
+        try {
+            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./report/" + reportName, parameters, connect), false);
+            JasperPrint jasperPrint = JasperFillManager.fillReport("./report/" + reportName, parameters, connect);
+//            jasperViewer.setTitle(title);
+//            jasperViewer.setLocationRelativeTo(null);
+//            jasperViewer.setVisible(true);
+
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+            int selectedService = 0;
+
+            for (int i = 0; i < services.length; i++) {
+//                System.out.println(services[i].getName().toString());
+                if ((services[i].getName().toString().toLowerCase().contains("zebra")) || (services[i].getName().toString().toLowerCase().contains("gt800"))) {
+                    /*If the service is named as what we are querying we select it */
+                    System.out.println("Daftar printer dipilih: " + services[i].getName().toString());
+                    selectedService = i;
+                    System.out.println("index printer dipilih : " + i);
+                }
+            }
+            printerJob.setPrintService(services[selectedService]);
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            printRequestAttributeSet.add(new Copies(3));
+            JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, services[selectedService]);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, services[selectedService].getAttributes());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
+            exporter.exportReport();
+            //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : " + ex);
+        }
+    }
+
     public void pindah(java.awt.event.KeyEvent evt, JTextField kiri, JTextField kanan) {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             kanan.requestFocus();
@@ -1216,6 +1260,19 @@ public final class validasi {
             return result;
         } else {
             return Math.round(number);
+        }
+    }
+
+    public boolean ValidasiRegistrasi(String kodepoli, String kodedokter, String norm, String tglperiksa, String kodepj) {
+        try {
+            if (sek.cariInteger("select count(reg_periksa.no_rm) from reg_periksa where reg_periksa.kd_poli='" + kodepoli + "' and reg_periksa.kd_dokter='" + kodedokter + "' and reg_periksa.no_rkm_medis='" + norm + "' and reg_periksa.tgl_registrasi='" + tglperiksa + "' reg_periksa.kd_pj='" + kodepj + "'") > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+            return false;
         }
     }
 

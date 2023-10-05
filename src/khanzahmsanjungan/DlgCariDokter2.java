@@ -217,6 +217,41 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
 
     }
 
+    public void tampilDokterTerapi(String kodedokterbpjs) {
+        Valid.tabelKosong(tabMode);
+        try {
+            ps = koneksi.prepareStatement("SELECT\n"
+                    + "	maping_dokter_dpjpvclaim.kd_dokter, \n"
+                    + "	dokter.nm_dokter\n"
+                    + "FROM\n"
+                    + "	maping_dokter_dpjpvclaim\n"
+                    + "	INNER JOIN\n"
+                    + "	dokter\n"
+                    + "	ON \n"
+                    + "	maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter "
+                    + "where maping_dokter_dpjpvclaim.kd_dokter_bpjs='" + kodedokterbpjs + "'");
+            try {
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    tabMode.addRow(new Object[]{rs.getString(1), rs.getString(2)});
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+
+    }
+
     public void emptTeks() {
 
     }

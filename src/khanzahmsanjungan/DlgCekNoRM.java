@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
  * @author Kode
  */
 public class DlgCekNoRM extends javax.swing.JDialog {
-    
+
     private Connection koneksi = koneksiDB.condb();
     private sekuel Sequel = new sekuel();
     private validasi Valid = new validasi();
@@ -56,7 +56,7 @@ public class DlgCekNoRM extends javax.swing.JDialog {
     public DlgCekNoRM(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
-        
+
         try {
             ps = koneksi.prepareStatement(
                     "select nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"
@@ -71,7 +71,7 @@ public class DlgCekNoRM extends javax.swing.JDialog {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             aktifjadwal = prop.getProperty("JADWALDOKTERDIREGISTRASI");
@@ -82,7 +82,7 @@ public class DlgCekNoRM extends javax.swing.JDialog {
             URUTNOREG = "";
             BASENOREG = "";
         }
-        
+
     }
 
     /**
@@ -191,9 +191,9 @@ public class DlgCekNoRM extends javax.swing.JDialog {
 
         jLabel28.setForeground(new java.awt.Color(0, 131, 62));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("No Rekam Medis Pasien : ");
+        jLabel28.setText("No Rekam Medis Pasien / NIK KTP : ");
         jLabel28.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        jLabel28.setPreferredSize(new java.awt.Dimension(250, 75));
+        jLabel28.setPreferredSize(new java.awt.Dimension(350, 75));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 14;
@@ -247,39 +247,39 @@ public class DlgCekNoRM extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void NoRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoRegActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoRegActionPerformed
-    
+
     private void NoRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRegKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoRegKeyPressed
-    
+
     private void NoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoRawatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoRawatActionPerformed
-    
+
     private void NoRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRawatKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoRawatKeyPressed
-    
+
     private void BiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BiayaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BiayaActionPerformed
-    
+
     private void BiayaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BiayaKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BiayaKeyPressed
-    
+
     private void NoRMPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoRMPasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoRMPasienActionPerformed
-    
+
     private void NoRMPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRMPasienKeyPressed
-        
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if (Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'") == 1) {
@@ -302,14 +302,14 @@ public class DlgCekNoRM extends javax.swing.JDialog {
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
-        
+
     }//GEN-LAST:event_NoRMPasienKeyPressed
-    
+
     private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
-        
+
         dispose();
     }//GEN-LAST:event_BtnCloseActionPerformed
-    
+
     private void BtnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClose2ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'") == 1) {
@@ -319,10 +319,17 @@ public class DlgCekNoRM extends javax.swing.JDialog {
             form.setLocationRelativeTo(jPanel1);
             this.dispose();
             form.setVisible(true);
+        } else if (Sequel.cariInteger("select count(pasien.no_ktp) from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'") == 1) {
+            DlgRegistrasiWalkIn form = new DlgRegistrasiWalkIn(null, true);
+            form.setPasien(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
+            form.setSize(this.getWidth(), this.getHeight());
+            form.setLocationRelativeTo(jPanel1);
+            this.dispose();
+            form.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(rootPane, "No Rekam Medis tidak terdaftar ");
+            NoRMPasien.setText("");
         }
-        
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnClose2ActionPerformed
 
@@ -333,7 +340,7 @@ public class DlgCekNoRM extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgCekNoRM dialog = new DlgCekNoRM(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -357,11 +364,11 @@ public class DlgCekNoRM extends javax.swing.JDialog {
 
     public void setPasien(String norm, String kodepoli, String kddokter) {
     }
-    
+
     private void UpdateUmur() {
-        
+
     }
-    
+
     private void isNumber() {
     }
 }

@@ -205,6 +205,10 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
+        if (evt.getClickCount() == 1) {
+            dispose();
+        }
+
         if (evt.getClickCount() == 2) {
             dispose();
         }

@@ -217,6 +217,41 @@ public final class DlgCariPoli extends javax.swing.JDialog {
 
     }
 
+    public void tampilPoliMapping(String kodepolihfis) {
+        Valid.tabelKosong(tabMode);
+        try {
+            ps = koneksi.prepareStatement("SELECT\n"
+                    + "	poliklinik.nm_poli, \n"
+                    + "	maping_poli_bpjs.kd_poli_rs\n"
+                    + " FROM\n"
+                    + "	maping_poli_bpjs\n"
+                    + "	INNER JOIN\n"
+                    + "	poliklinik\n"
+                    + "	ON \n"
+                    + "	maping_poli_bpjs.kd_poli_rs = poliklinik.kd_poli "
+                    + " where maping_poli_bpjs.kd_poli_bpjs= '" + kodepolihfis + "' ");
+            try {
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    tabMode.addRow(new Object[]{rs.getString(2), rs.getString(1)});
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+
+    }
+
     public void emptTeks() {
 
     }

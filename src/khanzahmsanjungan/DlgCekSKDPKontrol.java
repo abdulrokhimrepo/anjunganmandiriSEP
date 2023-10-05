@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import raven.toast.Notifications;
 
 /**
  *
@@ -309,15 +310,29 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog {
     private void NoRMPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRMPasienKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (Sequel.cariInteger("select count(bridging_surat_kontrol_bpjs.no_surat) from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'") > 0) {
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
-                form.tampilKontrol(NoRMPasien.getText());
-                form.setSize(this.getWidth(), this.getHeight());
-                form.setLocationRelativeTo(jPanel1);
-                this.dispose();
-                form.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
+//                if (Sequel.cariInteger("select DATEDIFF(bridging_surat_kontrol_bpjs.tgl_rencana,CURRENT_DATE) from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'") < 0) {
+//                    
+//                }
+                String tanggalkontrol = Sequel.cariIsi("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'");
+                if (Sequel.cariInteger("select DATEDIFF('" + tanggalkontrol + "',CURRENT_DATE)") > 0) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Jadwal kontrol tidak boleh maju");
+                    NoRMPasien.setText("");
+                } else if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorreferensi) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.tanggalperiksa=current_date") > 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Pasien telah menggunakan Mobile JKN. Silahkan cekin menggunakan menu MobileJKN");
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
+                    form.tampilKontrol(NoRMPasien.getText());
+                    form.setSize(this.getWidth(), this.getHeight());
+                    form.setLocationRelativeTo(jPanel1);
+                    this.dispose();
+                    form.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+
             } else {
+//                Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Data surat kontrol tidak ditemukan!");
                 JOptionPane.showMessageDialog(rootPane, "Data surat kontrol tidak ditemukan!");
             }
         }
@@ -332,14 +347,22 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog {
     private void BtnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClose2ActionPerformed
 
         if (Sequel.cariInteger("select count(bridging_surat_kontrol_bpjs.no_surat) from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'") > 0) {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
-            form.tampilKontrol(NoRMPasien.getText());
-            form.setSize(this.getWidth(), this.getHeight());
-            form.setLocationRelativeTo(jPanel1);
-            this.dispose();
-            form.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
+            String tanggalkontrol = Sequel.cariIsi("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'");
+            if (Sequel.cariInteger("select DATEDIFF('" + tanggalkontrol + "',CURRENT_DATE)") > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Jadwal kontrol tidak boleh diajkukan");
+                NoRMPasien.setText("");
+            } else if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorreferensi) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.tanggalperiksa=current_date") > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Pasien telah menggunakan Mobile JKN. Silahkan cekin menggunakan menu MobileJKN");
+            } else {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
+                form.tampilKontrol(NoRMPasien.getText());
+                form.setSize(this.getWidth(), this.getHeight());
+                form.setLocationRelativeTo(jPanel1);
+                this.dispose();
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Data surat kontrol tidak ditemukan!");
         }

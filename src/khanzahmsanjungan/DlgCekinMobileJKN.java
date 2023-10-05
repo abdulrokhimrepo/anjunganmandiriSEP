@@ -218,7 +218,7 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
 
         jLabel28.setForeground(new java.awt.Color(0, 131, 62));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("No Rujukan / No Peserta");
+        jLabel28.setText("No Peserta / No RM");
         jLabel28.setFont(new java.awt.Font("Poppins", 0, 36)); // NOI18N
         jLabel28.setPreferredSize(new java.awt.Dimension(500, 75));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -307,14 +307,29 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
 
     private void NoRMPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRMPasienKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
-            form.tampil(NoRMPasien.getText());
-            form.setSize(this.getWidth(), this.getHeight());
-            form.setLocationRelativeTo(jPanel1);
-            this.dispose();
-            form.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
+            if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorkartu) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorkartu='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()") > 0) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
+                form.tampil(NoRMPasien.getText());
+                form.setSize(this.getWidth(), this.getHeight());
+                form.setLocationRelativeTo(jPanel1);
+                this.dispose();
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            } else if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorkartu) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()") > 0) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
+                form.tampil(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+                form.setSize(this.getWidth(), this.getHeight());
+                form.setLocationRelativeTo(jPanel1);
+                this.dispose();
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Data Booking MobileJKN tidak ditemukan. ");
+            }
+
         }
 
     }//GEN-LAST:event_NoRMPasienKeyPressed
@@ -325,14 +340,29 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseActionPerformed
 
     private void BtnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClose2ActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
-        form.tampil(NoRMPasien.getText());
-        form.setSize(this.getWidth(), this.getHeight());
-        form.setLocationRelativeTo(jPanel1);
-        this.dispose();
-        form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
+
+        if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorkartu) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorkartu='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()") > 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
+            form.tampil(NoRMPasien.getText());
+            form.setSize(this.getWidth(), this.getHeight());
+            form.setLocationRelativeTo(jPanel1);
+            this.dispose();
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        } else if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorkartu) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()") > 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
+            form.tampil(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+            form.setSize(this.getWidth(), this.getHeight());
+            form.setLocationRelativeTo(jPanel1);
+            this.dispose();
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Data Booking MobileJKN tidak ditemukan. ");
+        }
+
     }//GEN-LAST:event_BtnClose2ActionPerformed
 
     /**
