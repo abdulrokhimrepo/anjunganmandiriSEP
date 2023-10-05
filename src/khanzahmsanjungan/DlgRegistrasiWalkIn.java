@@ -638,6 +638,11 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Maaf, dokter  tidak berpraktek pada tanggal yang anda pilih ");
         } else if (Sequel.cariInteger("select count(no_rkm_medis) from reg_periksa where kd_pj='A09' and no_rkm_medis='" + lblNoRM.getText() + "' and kd_poli='" + kode_poli + "' and kd_dokter='" + kode_dokter + "' and tgl_registrasi='" + Valid.SetTgl(TanggalPeriksa.getSelectedItem() + "") + "' ") > 0) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, anda sudah terdaftar pada hari ini dengan dokter yang sama ");
+        } else if (GeneralConsentSatuSehat(lblNoRM.getText()) == false) {
+            int i = JOptionPane.showConfirmDialog(rootPane, "Anda perlu menyetujui Inform Consent terbaru tentang Platform SATUSEHAT. \n Apakah anda menyetujui? \n", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                generalconsentsave(lblNoRM.getText());
+            }
         } else {
             isNumber();
             String biayareg = Sequel.cariIsi("SELECT registrasilama FROM poliklinik WHERE kd_poli='" + kode_poli + "'");
@@ -647,7 +652,9 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
                     new String[]{NoReg.getText(), NoRawat.getText(), Valid.SetTgl(TanggalPeriksa.getSelectedItem() + ""), Sequel.cariIsi("select current_time()"),
                         kode_dokter, lblNoRM.getText(), kode_poli, TPngJwb.getText(), TAlmt.getText(), THbngn.getText(), biayareg, "Belum",
                         "Lama", "Ralan", "A09", umur, sttsumur, "Belum Bayar", status}) == true) {
+//                Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{TNoRM.getText()});
                 MnCetakRegisterActionPerformed(NoRawat.getText());
+//                MnCetakBarcodeRawatJalan(NoRawat.getText());
                 NoReg.setText("");
                 TNoRw.setText("");
                 NoRawat.setText("");
@@ -1096,6 +1103,44 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
         System.out.println(norawat);
         this.setCursor(Cursor.getDefaultCursor());
 
+    }
+
+    private void MnCetakBarcodeRawatJalan(String norawat) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("emailrs", akses.getemailrs());
+        param.put("no_rawat", norawat);
+        param.put("logo", Sequel.cariGambar("select logo from setting"));
+        Valid.MyReportSilentPrint("rptBarcodeRawat3.jasper", param, "::[ Barcode No.RM ]::");
+        this.setCursor(Cursor.getDefaultCursor());
+
+    }
+
+    public boolean GeneralConsentSatuSehat(String NoRMPasien) {
+        int cariflaging = Sequel.cariInteger("select count(flagging_pasien_satusehat.no_rkm_medis) from flagging_pasien_satusehat where flagging_pasien_satusehat.no_rkm_medis='" + NoRMPasien + "'");
+        boolean statussatusehat = false;
+
+        if (cariflaging > 0) {
+            statussatusehat = true;
+        } else {
+            statussatusehat = false;
+        }
+
+        return statussatusehat;
+    }
+
+    private void generalconsentsave(String nomorrm) {
+        if (GeneralConsentSatuSehat(nomorrm) == false) {
+            Sequel.menyimpan2("flagging_pasien_satusehat", "?,?,?", "Data", 3, new String[]{
+                nomorrm, "yes", Sequel.cariIsi("select now()")
+            });
+
+        }
     }
 
 }

@@ -326,6 +326,11 @@ public class DlgCekBooking extends javax.swing.JDialog {
             } else if (Sequel.cariInteger("SELECT count(no_rkm_medis) FROM booking_registrasi WHERE status='Batal' and no_rkm_medis = '" + NoRMPasien.getText() + "' AND tanggal_periksa=current_date()") > 0) {
                 JOptionPane.showMessageDialog(rootPane, "Data Booking telah dibatalkan ");
                 NoRMPasien.setText("");
+            } else if (GeneralConsentSatuSehat(NoRMPasien.getText()) == false) {
+                int i = JOptionPane.showConfirmDialog(rootPane, "Anda perlu menyetujui Inform Consent terbaru tentang Platform SATUSEHAT. \n Apakah anda menyetujui? \n", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) {
+                    generalconsentsave(NoRMPasien.getText());
+                }
             } else {
                 isCekPasien();
                 isBooking();
@@ -371,6 +376,11 @@ public class DlgCekBooking extends javax.swing.JDialog {
         } else if (Sequel.cariInteger("SELECT count(no_rkm_medis) FROM booking_registrasi WHERE status='Batal' and no_rkm_medis = '" + NoRMPasien.getText() + "' AND tanggal_periksa=current_date()") > 0) {
             JOptionPane.showMessageDialog(rootPane, "Data Booking telah dibatalkan ");
             NoRMPasien.setText("");
+        } else if (GeneralConsentSatuSehat(NoRMPasien.getText()) == false) {
+            int i = JOptionPane.showConfirmDialog(rootPane, "Anda perlu menyetujui Inform Consent terbaru tentang Platform SATUSEHAT. \n Apakah anda menyetujui? \n", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                generalconsentsave(NoRMPasien.getText());
+            }
         } else {
             isCekPasien();
             isBooking();
@@ -491,6 +501,7 @@ public class DlgCekBooking extends javax.swing.JDialog {
                         Sequel.queryu2("update booking_registrasi set waktu_kunjungan='" + Sequel.cariIsi("select now()") + "' where no_rkm_medis=? and tanggal_periksa=? and kd_dokter=? and kd_poli=? ", 4, new String[]{
                             NoRMPasien.getText(), Sequel.cariIsi("select current_date()"), rs.getString(5), rs.getString(6)
                         });
+                        Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{NoRMPasien.getText()});
 
                         JOptionPane.showMessageDialog(rootPane, "Berhasil");
                         MnCetakRegisterActionPerformed(NoRawat.getText());
@@ -543,5 +554,27 @@ public class DlgCekBooking extends javax.swing.JDialog {
         System.out.println(norawat);
         this.setCursor(Cursor.getDefaultCursor());
 
+    }
+
+    public boolean GeneralConsentSatuSehat(String NoRMPasien) {
+        int cariflaging = Sequel.cariInteger("select count(flagging_pasien_satusehat.no_rkm_medis) from flagging_pasien_satusehat where flagging_pasien_satusehat.no_rkm_medis='" + NoRMPasien + "'");
+        boolean statussatusehat = false;
+
+        if (cariflaging > 0) {
+            statussatusehat = true;
+        } else {
+            statussatusehat = false;
+        }
+
+        return statussatusehat;
+    }
+
+    private void generalconsentsave(String nomorrm) {
+        if (GeneralConsentSatuSehat(nomorrm) == false) {
+            Sequel.menyimpan2("flagging_pasien_satusehat", "?,?,?", "Data", 3, new String[]{
+                nomorrm, "yes", Sequel.cariIsi("select now()")
+            });
+
+        }
     }
 }
