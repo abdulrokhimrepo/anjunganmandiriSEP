@@ -318,7 +318,6 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             } else if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.nomorkartu) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()") > 0) {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
                 DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
                 form.tampil(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
                 form.setSize(this.getWidth(), this.getHeight());

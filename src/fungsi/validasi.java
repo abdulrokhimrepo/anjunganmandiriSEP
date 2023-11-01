@@ -723,6 +723,21 @@ public final class validasi {
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, rsdt);
                 JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
 
+                jasperViewer.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowOpened(java.awt.event.WindowEvent windowEvent) {
+                        // Close the viewer after a delay (adjust the sleep time as needed)
+                        try {
+                            Thread.sleep(10000); // 5000 milliseconds = 5 seconds
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        jasperViewer.setVisible(false); // Hide the viewer
+                        jasperViewer.dispose(); // Dispose of resources
+                    }
+                });
+
                 PrinterJob printerJob = PrinterJob.getPrinterJob();
 //                printerJob.setPrintService(printerJob.getPrintService());
                 PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
