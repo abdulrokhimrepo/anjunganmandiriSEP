@@ -30,9 +30,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -45,17 +42,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.bouncycastle.crypto.engines.TnepresEngine;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -559,6 +551,8 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         btnDokterTerapi = new widget.Button();
         btnPoliTerapi = new widget.Button();
         LabelPoli7 = new widget.Label();
+        btnDiagnosaAwal3 = new widget.Button();
+        btnDiagnosaAwal4 = new widget.Button();
         jPanel3 = new javax.swing.JPanel();
         btnSimpan = new component.Button();
         btnFingerPrint = new component.Button();
@@ -673,7 +667,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         });
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         Tanggal.setOpaque(false);
@@ -733,7 +727,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         jLabel20.setBounds(660, 130, 70, 30);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -754,7 +748,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         jLabel22.setBounds(650, 160, 80, 30);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -1040,7 +1034,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         jLabel38.setBounds(650, 280, 80, 30);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -1408,6 +1402,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         btnDiagnosaAwal2.setText("Riwayat Layanan BPJS");
         btnDiagnosaAwal2.setToolTipText("Alt+X");
         btnDiagnosaAwal2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnDiagnosaAwal2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDiagnosaAwal2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDiagnosaAwal2ActionPerformed(evt);
@@ -1419,7 +1414,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
             }
         });
         jPanel2.add(btnDiagnosaAwal2);
-        btnDiagnosaAwal2.setBounds(1040, 160, 220, 30);
+        btnDiagnosaAwal2.setBounds(1040, 150, 220, 30);
 
         KodeDokterTerapi.setEditable(false);
         KodeDokterTerapi.setBackground(new java.awt.Color(255, 255, 153));
@@ -1485,6 +1480,44 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         LabelPoli7.setPreferredSize(new java.awt.Dimension(55, 23));
         jPanel2.add(LabelPoli7);
         LabelPoli7.setBounds(90, 430, 140, 30);
+
+        btnDiagnosaAwal3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/approvalfp.png"))); // NOI18N
+        btnDiagnosaAwal3.setMnemonic('X');
+        btnDiagnosaAwal3.setText("Approval FP BPJS");
+        btnDiagnosaAwal3.setToolTipText("Alt+X");
+        btnDiagnosaAwal3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnDiagnosaAwal3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDiagnosaAwal3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosaAwal3ActionPerformed(evt);
+            }
+        });
+        btnDiagnosaAwal3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDiagnosaAwal3KeyPressed(evt);
+            }
+        });
+        jPanel2.add(btnDiagnosaAwal3);
+        btnDiagnosaAwal3.setBounds(1040, 260, 190, 50);
+
+        btnDiagnosaAwal4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pengajuan.png"))); // NOI18N
+        btnDiagnosaAwal4.setMnemonic('X');
+        btnDiagnosaAwal4.setText("Pengajuan FP BPJS");
+        btnDiagnosaAwal4.setToolTipText("Alt+X");
+        btnDiagnosaAwal4.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnDiagnosaAwal4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDiagnosaAwal4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosaAwal4ActionPerformed(evt);
+            }
+        });
+        btnDiagnosaAwal4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDiagnosaAwal4KeyPressed(evt);
+            }
+        });
+        jPanel2.add(btnDiagnosaAwal4);
+        btnDiagnosaAwal4.setBounds(1040, 200, 190, 50);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -1963,7 +1996,6 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 
     private void btnDiagnosaAwal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaAwal2ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
         historiPelayanan.setSize(jPanel1.getWidth() - 50, jPanel1.getHeight() - 50);
         historiPelayanan.setLocationRelativeTo(jPanel1);
         historiPelayanan.setKartu(NoKartu.getText());
@@ -1996,6 +2028,108 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
     private void btnPoliTerapiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliTerapiKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPoliTerapiKeyPressed
+
+    private void btnDiagnosaAwal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaAwal3ActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (!NoKartu.getText().equals("")) {
+            try {
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                utc = String.valueOf(api.GetUTCdatetimeAsString());
+                headers.add("X-Timestamp", utc);
+                headers.add("X-Signature", api.getHmac(utc));
+                headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                URL = link + "/Sep/aprovalSEP";
+                requestJson = " {"
+                        + "\"request\": {"
+                        + "\"t_sep\": {"
+                        + "\"noKartu\": \"" + NoKartu.getText() + "\","
+                        + "\"tglSep\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
+                        + "\"jnsPelayanan\": \"" + JenisPelayanan.getSelectedItem().toString().substring(0, 1) + "\","
+                        + "\"jnsPengajuan\": \"2\","
+                        + "\"keterangan\": \"Aproval FingerPrint karena Gagal FP melalui Anjungan Pasien Mandiri\","
+                        + "\"user\": \"NoRM:" + TNoRM.getText() + "\""
+                        + "}"
+                        + "}"
+                        + "}";
+                requestEntity = new HttpEntity(requestJson, headers);
+                root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                nameNode = root.path("metaData");
+                System.out.println("code : " + nameNode.path("code").asText());
+                //System.out.println("message : "+nameNode.path("message").asText());
+                if (nameNode.path("code").asText().equals("200")) {
+                    JOptionPane.showMessageDialog(rootPane, "Arpoval Berhasil");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, nameNode.path("message").asText());
+                }
+            } catch (Exception ex) {
+                System.out.println("Notifikasi Bridging : " + ex);
+                if (ex.toString().contains("UnknownHostException")) {
+                    JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih data peserta yang mau dimapping transaksinya...!!!!");
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnDiagnosaAwal3ActionPerformed
+
+    private void btnDiagnosaAwal3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDiagnosaAwal3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDiagnosaAwal3KeyPressed
+
+    private void btnDiagnosaAwal4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaAwal4ActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (!NoKartu.getText().equals("")) {
+            try {
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                utc = String.valueOf(api.GetUTCdatetimeAsString());
+                headers.add("X-Timestamp", utc);
+                headers.add("X-Signature", api.getHmac(utc));
+                headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                URL = link + "/Sep/pengajuanSEP";
+                requestJson = " {"
+                        + "\"request\": {"
+                        + "\"t_sep\": {"
+                        + "\"noKartu\": \"" + NoKartu.getText() + "\","
+                        + "\"tglSep\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
+                        + "\"jnsPelayanan\": \"" + JenisPelayanan.getSelectedItem().toString().substring(0, 1) + "\","
+                        + "\"jnsPengajuan\": \"2\","
+                        + "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Mandiri RS Indriati Boyolali\","
+                        + "\"user\": \"NoRM:" + TNoRM.getText() + "\""
+                        + "}"
+                        + "}"
+                        + "}";
+                requestEntity = new HttpEntity(requestJson, headers);
+                root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                nameNode = root.path("metaData");
+                System.out.println("code : " + nameNode.path("code").asText());
+                System.out.println("message : " + nameNode.path("message").asText());
+                if (nameNode.path("code").asText().equals("200")) {
+                    JOptionPane.showMessageDialog(rootPane, "Pengajuan Berhasil");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, nameNode.path("message").asText());
+                }
+            } catch (Exception ex) {
+                System.out.println("Notifikasi Bridging : " + ex);
+                if (ex.toString().contains("UnknownHostException")) {
+                    JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, Pasien tidak ada");
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnDiagnosaAwal4ActionPerformed
+
+    private void btnDiagnosaAwal4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDiagnosaAwal4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDiagnosaAwal4KeyPressed
 
     /**
      * @param args the command line arguments
@@ -2089,6 +2223,8 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
     private widget.Button btnDiagnosaAwal;
     private widget.Button btnDiagnosaAwal1;
     private widget.Button btnDiagnosaAwal2;
+    private widget.Button btnDiagnosaAwal3;
+    private widget.Button btnDiagnosaAwal4;
     private widget.Button btnDokterTerapi;
     private component.Button btnFingerPrint;
     private component.Button btnKeluar;
@@ -2598,7 +2734,14 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                 KdPenyakit.setText(response.path("diagnosa").path("kode").asText());
                 NmPenyakit.setText(response.path("diagnosa").path("nama").asText());
                 NoRujukan.setText(response.path("noKunjungan").asText());
-                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
+                if (response.path("peserta").path("hakKelas").path("kode").asText().equals("1")) {
+                    Kelas.setSelectedIndex(0);
+                } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("2")) {
+                    Kelas.setSelectedIndex(1);
+                } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("3")) {
+                    Kelas.setSelectedIndex(2);
+                }
+//                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
                 prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
                 peserta = response.path("peserta").path("jenisPeserta").path("keterangan").asText();
                 NoTelp.setText(response.path("peserta").path("mr").path("noTelepon").asText());
@@ -2680,6 +2823,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                         ps.close();
                     }
                 }
+
             } else {
                 emptTeks();
 //                dispose();
@@ -2691,6 +2835,8 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
             }
         }
+
+//        btnFingerPrintActionPerformed(null);
     }
 
     public void tampilPecahSEP(String nomorrujukan) {
@@ -2713,7 +2859,14 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                 KdPenyakit.setText(response.path("diagnosa").path("kode").asText());
                 NmPenyakit.setText(response.path("diagnosa").path("nama").asText());
                 NoRujukan.setText(response.path("noKunjungan").asText());
-                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
+                if (response.path("peserta").path("hakKelas").path("kode").asText().equals("1")) {
+                    Kelas.setSelectedIndex(0);
+                } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("2")) {
+                    Kelas.setSelectedIndex(1);
+                } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("3")) {
+                    Kelas.setSelectedIndex(2);
+                }
+//                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
                 prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
                 peserta = response.path("peserta").path("jenisPeserta").path("keterangan").asText();
                 NoTelp.setText(response.path("peserta").path("mr").path("noTelepon").asText());
@@ -2770,6 +2923,8 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
             }
         }
+
+//        btnFingerPrintActionPerformed(null);
     }
 
     public void tampilKontrol(String noSKDP) {
@@ -2831,7 +2986,14 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                         kodedokterreg = Sequel.cariIsi("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs=?", KdDPJP.getText());
                     }
                     NoSKDP.setText(noSKDP);
-                    Kelas.setSelectedItem(response.path("hakKelas").path("kode").asText() + ". " + response.path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
+                    if (response.path("peserta").path("hakKelas").path("kode").asText().equals("1")) {
+                        Kelas.setSelectedIndex(0);
+                    } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("2")) {
+                        Kelas.setSelectedIndex(1);
+                    } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("3")) {
+                        Kelas.setSelectedIndex(2);
+                    }
+//                    Kelas.setSelectedItem(response.path("hakKelas").path("kode").asText() + ". " + response.path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
                     prb = "";
                     peserta = response.path("jenisPeserta").path("keterangan").asText();
                     NoTelp.setText(response.path("peserta").path("mr").path("noTelepon").asText());
@@ -2932,7 +3094,14 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                         Valid.SetTgl(TanggalRujuk, response.path("tglKunjungan").asText());
                     }
                     NoSKDP.setText(noSKDP);
-                    Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
+                    if (response.path("peserta").path("hakKelas").path("kode").asText().equals("1")) {
+                        Kelas.setSelectedIndex(0);
+                    } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("2")) {
+                        Kelas.setSelectedIndex(1);
+                    } else if (response.path("peserta").path("hakKelas").path("kode").asText().equals("3")) {
+                        Kelas.setSelectedIndex(2);
+                    }
+//                    Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText() + ". " + response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS", "Kelas"));
                     prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
                     peserta = response.path("peserta").path("jenisPeserta").path("keterangan").asText();
                     NoTelp.setText(response.path("peserta").path("mr").path("noTelepon").asText());
@@ -2953,6 +3122,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                     Kdpnj.setText("BPJ");
                     nmpnj.setText("BPJS");
                     Catatan.setText("Anjungan Mandiri RS Indriati Boyolali");
+
                 } else {
                     emptTeks();
 //                dispose();
@@ -2967,6 +3137,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 
         }
 
+//        btnFingerPrintActionPerformed(null);
     }
 
     public void SimpanAntrianOnSite() {
@@ -3083,7 +3254,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                         requestEntity = new HttpEntity(requestJson, headers);
                         URL = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
                         System.out.println("URL : " + URL);
-                        System.out.println(requestEntity);
+//                        System.out.println(requestEntity);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class
                         ).getBody());
                         nameNode = root.path("metadata");
