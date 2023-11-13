@@ -4,6 +4,10 @@
  */
 package khanzahmsanjungan;
 
+import fungsi.akses;
+import fungsi.sekuel;
+import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
@@ -18,6 +22,8 @@ import javax.swing.JOptionPane;
 public class HalamanUtamaDepan extends javax.swing.JFrame {
 
     private static HalamanUtamaDepan myInstance;
+    private sekuel Sequel = new sekuel();
+    private validasi Valid = new validasi();
 
     /**
      * Creates new form HalamanUtamaDepan
@@ -45,18 +51,19 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         PanelWall = new usu.widget.glass.PanelGlass();
         jPanel1 = new component.Panel();
-        btnAdmin2 = new widget.ButtonBig();
+        btnAdmin10 = new widget.ButtonBig();
         btnAdmin7 = new widget.ButtonBig();
-        btnAdmin6 = new widget.ButtonBig();
+        btnAdmin2 = new widget.ButtonBig();
         btnAdmin5 = new widget.ButtonBig();
+        btnAdmin6 = new widget.ButtonBig();
         btnAdmin8 = new widget.ButtonBig();
         btnAdmin9 = new widget.ButtonBig();
+        btnAdmin11 = new widget.ButtonBig();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ANJUNGAN PASIEN MANDIRI");
         setBackground(new java.awt.Color(102, 102, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1280, 1024));
 
         jPanel3.setBackground(new java.awt.Color(238, 238, 255));
         jPanel3.setForeground(new java.awt.Color(238, 238, 255));
@@ -99,23 +106,23 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(238, 238, 255));
         jPanel1.setBorder(null);
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 1024));
-        jPanel1.setLayout(new java.awt.GridLayout(3, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(4, 0));
 
-        btnAdmin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/selfservice.png"))); // NOI18N
-        btnAdmin2.setText("PENDAFTARAN POLIKLINIK");
-        btnAdmin2.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        btnAdmin2.setIconTextGap(0);
-        btnAdmin2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdmin10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
+        btnAdmin10.setText("ANTRIAN PASIEN");
+        btnAdmin10.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        btnAdmin10.setIconTextGap(0);
+        btnAdmin10.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAdmin10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin2ActionPerformed(evt);
+                btnAdmin10ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin2);
+        jPanel1.add(btnAdmin10);
 
         btnAdmin7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checkin.png"))); // NOI18N
         btnAdmin7.setText("CEK IN REGISTRASI");
-        btnAdmin7.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        btnAdmin7.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         btnAdmin7.setIconTextGap(0);
         btnAdmin7.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin7.addActionListener(new java.awt.event.ActionListener() {
@@ -125,21 +132,21 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         });
         jPanel1.add(btnAdmin7);
 
-        btnAdmin6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
-        btnAdmin6.setText("SEP KONTROL");
-        btnAdmin6.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        btnAdmin6.setIconTextGap(0);
-        btnAdmin6.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin6.addActionListener(new java.awt.event.ActionListener() {
+        btnAdmin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
+        btnAdmin2.setText("PENDAFTARAN POLIKLINIK");
+        btnAdmin2.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        btnAdmin2.setIconTextGap(0);
+        btnAdmin2.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAdmin2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin6ActionPerformed(evt);
+                btnAdmin2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin6);
+        jPanel1.add(btnAdmin2);
 
         btnAdmin5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
         btnAdmin5.setText("SEP KUNJUNGAN PERTAMA");
-        btnAdmin5.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        btnAdmin5.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         btnAdmin5.setIconTextGap(0);
         btnAdmin5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin5.addActionListener(new java.awt.event.ActionListener() {
@@ -149,9 +156,21 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         });
         jPanel1.add(btnAdmin5);
 
+        btnAdmin6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
+        btnAdmin6.setText("SEP KONTROL");
+        btnAdmin6.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        btnAdmin6.setIconTextGap(0);
+        btnAdmin6.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAdmin6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmin6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdmin6);
+
         btnAdmin8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mobilejkn48.png"))); // NOI18N
         btnAdmin8.setText("Check In MobileJKN");
-        btnAdmin8.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        btnAdmin8.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         btnAdmin8.setIconTextGap(0);
         btnAdmin8.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin8.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +182,7 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
 
         btnAdmin9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
         btnAdmin9.setText("KONTROL BEDA POLI");
-        btnAdmin9.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        btnAdmin9.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         btnAdmin9.setIconTextGap(0);
         btnAdmin9.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin9.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +191,18 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAdmin9);
+
+        btnAdmin11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/logo-satset.png"))); // NOI18N
+        btnAdmin11.setText("Aktivasi SatuSehat");
+        btnAdmin11.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        btnAdmin11.setIconTextGap(0);
+        btnAdmin11.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAdmin11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmin11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdmin11);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -222,6 +253,21 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         pilih.setVisible(true);
     }//GEN-LAST:event_btnAdmin9ActionPerformed
 
+    private void btnAdmin10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin10ActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
+//        HalamanUtamaAntrian pilih = new HalamanUtamaAntrian();
+//        pilih.setSize(this.getWidth(), this.getHeight());
+//        pilih.setLocationRelativeTo(this);
+//        pilih.setVisible(true);
+    }//GEN-LAST:event_btnAdmin10ActionPerformed
+
+    private void btnAdmin11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin11ActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        String nikktppetugas = Sequel.cariIsi("select no_ktp from pegawai where nik='0132' ");
+        Valid.panggilUrl("kyc/index.php?&nikagent=" + nikktppetugas + "");
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnAdmin11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,6 +313,8 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private usu.widget.glass.PanelGlass PanelWall;
+    private widget.ButtonBig btnAdmin10;
+    private widget.ButtonBig btnAdmin11;
     private widget.ButtonBig btnAdmin2;
     private widget.ButtonBig btnAdmin5;
     private widget.ButtonBig btnAdmin6;
