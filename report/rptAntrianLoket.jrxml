@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="226" pageHeight="320" whenNoDataType="NoPages" columnWidth="198" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" whenResourceMissingType="Empty" uuid="c1e97af4-9c70-4d31-8cf4-7041acc02fd8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="100"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="labelantrian" class="java.lang.String"/>
+	<parameter name="nomorantrian" class="java.lang.String"/>
+	<parameter name="tanggal" class="java.lang.String"/>
+	<parameter name="jam" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT NOW()]]>
+	</queryString>
+	<title>
+		<band height="292">
+			<textField>
+				<reportElement x="10" y="2" width="189" height="22" uuid="f2d33700-0766-41c0-a4ef-69cca979f1ad"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="13" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="68" width="199" height="30" uuid="c22cba6b-ae4a-4cd2-b460-0379f410eed8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ANTRIAN  "+$P{labelantrian}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="224" width="199" height="68" uuid="3e319a40-e442-4f68-a1bc-93ec6638509b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nikmati akses Free Wifi di lingkungan RS dengan akses : 
+
+Username : sahabatindriati
+Password  : melayani]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="216" width="197" height="1" uuid="677d591a-59e2-4eb3-a54c-bedd09024843"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="7" y="117" width="192" height="80" uuid="20f73b54-3672-4d3e-9638-ceaf5342d7e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="36" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomorantrian}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="24" width="198" height="14" uuid="6d9a61ab-1c0e-4f00-b7d1-d82ebd0d3ba0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="38" width="198" height="14" uuid="a21b1f29-05e4-4efb-ba51-c6eb70972529"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="50" width="198" height="14" uuid="702e1357-a2aa-4b9e-a2cf-840e2de80538"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="5" y="66" width="197" height="1" uuid="8db0f8b3-9c7e-4bc8-8d74-55ac62396fe5"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="5" y="97" width="199" height="20" uuid="63011a21-b10b-43d1-b0e5-18cf5c0b5be3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="11" isBold="true" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[We Work For Healthier Indonesia   ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="197" width="99" height="20" uuid="980c3dc9-23d2-4fc9-9265-498b239bd0c4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="197" width="99" height="20" uuid="3d48cc2a-1ca6-4949-b50a-ee834ef92534"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{jam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

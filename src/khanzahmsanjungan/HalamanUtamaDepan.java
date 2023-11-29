@@ -254,11 +254,11 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdmin9ActionPerformed
 
     private void btnAdmin10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin10ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
-//        HalamanUtamaAntrian pilih = new HalamanUtamaAntrian();
-//        pilih.setSize(this.getWidth(), this.getHeight());
-//        pilih.setLocationRelativeTo(this);
-//        pilih.setVisible(true);
+//        JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
+        HalamanUtamaAntrian pilih = new HalamanUtamaAntrian();
+        pilih.setSize(this.getWidth(), this.getHeight());
+        pilih.setLocationRelativeTo(this);
+        pilih.setVisible(true);
     }//GEN-LAST:event_btnAdmin10ActionPerformed
 
     private void btnAdmin11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin11ActionPerformed

@@ -42,8 +42,6 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel39 = new widget.Label();
-        jPanel2 = new javax.swing.JPanel();
-        PanelWall = new usu.widget.glass.PanelGlass();
         jPanel1 = new component.Panel();
         btnAdmin2 = new widget.ButtonBig();
         btnAdmin3 = new widget.ButtonBig();
@@ -51,6 +49,8 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
         btnAdmin10 = new widget.ButtonBig();
         btnAdmin11 = new widget.ButtonBig();
         btnAdmin12 = new widget.ButtonBig();
+        jPanel2 = new javax.swing.JPanel();
+        PanelWall = new usu.widget.glass.PanelGlass();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ANJUNGAN PASIEN MANDIRI");
@@ -68,37 +68,6 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
         jPanel3.add(jLabel39);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
-
-        jPanel2.setBackground(new java.awt.Color(238, 238, 255));
-        jPanel2.setForeground(new java.awt.Color(238, 238, 255));
-
-        PanelWall.setBackground(new java.awt.Color(238, 238, 255));
-        PanelWall.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/indriatikars.png"))); // NOI18N
-        PanelWall.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
-        PanelWall.setForeground(new java.awt.Color(238, 238, 255));
-        PanelWall.setPreferredSize(new java.awt.Dimension(500, 150));
-        PanelWall.setRound(false);
-        PanelWall.setWarna(new java.awt.Color(238, 238, 255));
-        PanelWall.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PanelWallMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelWallLayout = new javax.swing.GroupLayout(PanelWall);
-        PanelWall.setLayout(PanelWallLayout);
-        PanelWallLayout.setHorizontalGroup(
-            PanelWallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-        PanelWallLayout.setVerticalGroup(
-            PanelWallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(PanelWall);
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setBackground(new java.awt.Color(238, 238, 255));
         jPanel1.setBorder(null);
@@ -179,12 +148,43 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setBackground(new java.awt.Color(238, 238, 255));
+        jPanel2.setForeground(new java.awt.Color(238, 238, 255));
+
+        PanelWall.setBackground(new java.awt.Color(238, 238, 255));
+        PanelWall.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/indriatikars.png"))); // NOI18N
+        PanelWall.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
+        PanelWall.setForeground(new java.awt.Color(238, 238, 255));
+        PanelWall.setPreferredSize(new java.awt.Dimension(500, 150));
+        PanelWall.setRound(false);
+        PanelWall.setWarna(new java.awt.Color(238, 238, 255));
+        PanelWall.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelWallMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelWallLayout = new javax.swing.GroupLayout(PanelWall);
+        PanelWall.setLayout(PanelWallLayout);
+        PanelWallLayout.setHorizontalGroup(
+            PanelWallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+        PanelWallLayout.setVerticalGroup(
+            PanelWallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(PanelWall);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdmin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin2ActionPerformed
         DlgAmbilAntrean pilih = new DlgAmbilAntrean(null, true);
-        pilih.setNoAntrian("ANTRIAN BOOKING", "C", "Loket");
+        pilih.setNoAntrian("ANTRIAN BOOKING", "C", "Loket by Appointment");
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
@@ -192,15 +192,30 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdmin2ActionPerformed
 
     private void btnAdmin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin3ActionPerformed
-        // TODO add your handling code here:
+        DlgAmbilAntrean pilih = new DlgAmbilAntrean(null, true);
+        pilih.setNoAntrian("ANTRIAN WALKIN", "A", "Loket");
+        pilih.setSize(this.getWidth(), this.getHeight());
+        pilih.setLocationRelativeTo(this);
+        pilih.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAdmin3ActionPerformed
 
     private void btnAdmin4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin4ActionPerformed
-        // TODO add your handling code here:
+        DlgAmbilAntrean pilih = new DlgAmbilAntrean(null, true);
+        pilih.setNoAntrian("ANTRIAN RANAP/IGD", "D", "Ranap");
+        pilih.setSize(this.getWidth(), this.getHeight());
+        pilih.setLocationRelativeTo(this);
+        pilih.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAdmin4ActionPerformed
 
     private void btnAdmin10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin10ActionPerformed
-        // TODO add your handling code here:
+        DlgAmbilAntrean pilih = new DlgAmbilAntrean(null, true);
+        pilih.setNoAntrian("CUSTOMER SERVICE", "B", "CS");
+        pilih.setSize(this.getWidth(), this.getHeight());
+        pilih.setLocationRelativeTo(this);
+        pilih.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAdmin10ActionPerformed
 
     private void btnAdmin11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin11ActionPerformed
@@ -213,10 +228,10 @@ public class HalamanUtamaAntrian extends javax.swing.JFrame {
 
     private void PanelWallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelWallMouseClicked
         this.dispose();
-        HalamanUtamaDepan kembali = new HalamanUtamaDepan();
-        kembali.setSize(this.getWidth(), this.getHeight());
-        kembali.setLocationRelativeTo(this);
-        kembali.setVisible(true);
+//        HalamanUtamaDepan kembali = new HalamanUtamaDepan();
+//        kembali.setSize(this.getWidth(), this.getHeight());
+//        kembali.setLocationRelativeTo(this);
+//        kembali.setVisible(true);
     }//GEN-LAST:event_PanelWallMouseClicked
 
     /**

@@ -10,25 +10,17 @@
  */
 package khanzahmsanjungan;
 
-import bridging.BPJSCekRujukanKartuPCare;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,10 +34,11 @@ public class DlgAmbilAntrean extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
-    private String umur = "0", sttsumur = "Th";
+    private String umur = "0", sttsumur = "Th", jnsloket = "", hurufantrianget = "";
     private String status = "Baru", BASENOREG = "", URUTNOREG = "", aktifjadwal = "";
+
     private Properties prop = new Properties();
-    private int lebar = 0, tinggi = 0;
+    private int lebar = 0, tinggi = 0, antriansekarang = 0;
 
     /**
      * Creates new form DlgAdmin
@@ -56,32 +49,6 @@ public class DlgAmbilAntrean extends javax.swing.JDialog {
     public DlgAmbilAntrean(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
-//
-//        try {
-//            ps = koneksi.prepareStatement(
-//                    "select nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"
-//                    + "namakeluarga,keluarga,pasien.kd_pj,penjab.png_jawab,if(tgl_daftar=?,'Baru','Lama') as daftar, "
-//                    + "TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) as tahun, "
-//                    + "(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12)) as bulan, "
-//                    + "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari from pasien "
-//                    + "inner join kelurahan inner join kecamatan inner join kabupaten inner join penjab "
-//                    + "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_pj=penjab.kd_pj "
-//                    + "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "
-//                    + "where pasien.no_rkm_medis=?");
-//        } catch (Exception ex) {
-//            System.out.println(ex);
-//        }
-//
-//        try {
-//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-//            aktifjadwal = prop.getProperty("JADWALDOKTERDIREGISTRASI");
-//            URUTNOREG = prop.getProperty("URUTNOREG");
-//            BASENOREG = prop.getProperty("BASENOREG");
-//        } catch (Exception ex) {
-//            aktifjadwal = "";
-//            URUTNOREG = "";
-//            BASENOREG = "";
-//        }
 
     }
 
@@ -272,7 +239,16 @@ public class DlgAmbilAntrean extends javax.swing.JDialog {
 
     private void BtnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClose2ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        String sqlQuery = "type, noantrian, postdate, start_time, end_time";
+        String[] values = new String[]{jnsloket, String.valueOf(antriansekarang), Sequel.cariIsi("select current_date()"), Sequel.cariIsi("select current_time()"), "00:00:00"};
 
+        if (Sequel.menyimpantfautoincrement("antrian_loket", sqlQuery, values.length, values) == true) {
+            CetakAntrian(lblNamaAntrian.getText(), antriansekarang, Sequel.cariIsi("select current_date()"), Sequel.cariIsi("select current_time()"));
+            lblNamaAntrian.setText("");
+            lblNoAntrian.setText("");
+            antriansekarang = 0;
+            dispose();
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnClose2ActionPerformed
 
@@ -316,11 +292,40 @@ public class DlgAmbilAntrean extends javax.swing.JDialog {
     }
 
     public void setNoAntrian(String namalabel, String hurufantrian, String tipeloket) {
+        jnsloket = "";
+        if (Sequel.cariInteger("select count(antrian_loket.noantrian) from antrian_loket where round(DATE_FORMAT(postdate, '%d')) = DAY(CURDATE()) AND round(DATE_FORMAT(postdate, '%m')) = MONTH(CURDATE()) AND round(DATE_FORMAT(postdate, '%Y')) = YEAR(CURDATE()) AND type = '" + tipeloket + "'") < 1) {
+            antriansekarang = 1;
+        } else {
+            antriansekarang = Integer.parseInt(Sequel.cariIsi("SELECT MAX(CAST(noantrian as UNSIGNED)) as noantrian FROM antrian_loket WHERE round(DATE_FORMAT(postdate, '%d')) = DAY(CURDATE()) AND round(DATE_FORMAT(postdate, '%m')) = MONTH(CURDATE()) AND round(DATE_FORMAT(postdate, '%Y')) = YEAR(CURDATE()) AND type = '" + tipeloket + "' ORDER BY round(noantrian) DESC")) + 1;
+        }
 
-        lblNoAntrian.setText(hurufantrian + "" + (Integer.parseInt(Sequel.cariIsi("SELECT MAX(CAST(noantrian as UNSIGNED)) as noantrian FROM antrian_loket WHERE round(DATE_FORMAT(postdate, '%d')) = DAY(CURDATE()) AND round(DATE_FORMAT(postdate, '%m')) = MONTH(CURDATE()) AND round(DATE_FORMAT(postdate, '%Y')) = YEAR(CURDATE()) AND type = '" + tipeloket + "' ORDER BY round(noantrian) DESC")) + 1));
+        lblNoAntrian.setText(hurufantrian + "" + antriansekarang);
         lblNamaAntrian.setText(namalabel);
+        jnsloket = tipeloket;
+        hurufantrianget = hurufantrian;
+
     }
 
-    private void isNumber() {
+    private void CetakAntrian(String label, Integer noantrian, String tgl, String jam) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("labelantrian", label);
+        param.put("nomorantrian", hurufantrianget + String.valueOf(noantrian));
+        param.put("tanggal", tgl);
+        param.put("jam", jam);
+        param.put("namars", Sequel.cariIsi("select nama_instansi from setting"));
+        param.put("alamatrs", Sequel.cariIsi("select alamat_instansi from setting"));
+        param.put("kotars", Sequel.cariIsi("select kabupaten from setting"));
+        param.put("propinsirs", Sequel.cariIsi("select propinsi from setting"));
+        param.put("kontakrs", Sequel.cariIsi("select kontak from setting"));
+        param.put("emailrs", Sequel.cariIsi("select email from setting"));
+        param.put("logo", Sequel.cariGambar("select logo from setting"));
+
+        Valid.MyReportqryabdulAntrian("rptAntrianLoket.jasper", "report", "::[ No Antrian Loket ]::",
+                "", param);
+
+        this.setCursor(Cursor.getDefaultCursor());
+
     }
 }
