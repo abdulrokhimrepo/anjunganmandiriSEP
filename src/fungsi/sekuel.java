@@ -238,6 +238,53 @@ public final class sekuel {
         }
     }
 
+    public boolean menyimpantfautoincrement(String table, String columns, int count, String[] values) {
+        try {
+            StringBuilder sqlQuery = new StringBuilder("INSERT INTO " + table + " (" + columns + ") VALUES (");
+
+            // Append placeholders for the values
+            for (int i = 0; i < count; i++) {
+                sqlQuery.append("?");
+                if (i < count - 1) {
+                    sqlQuery.append(",");
+                }
+            }
+
+            sqlQuery.append(")");
+
+            // Create PreparedStatement
+            ps = connect.prepareStatement(sqlQuery.toString());
+
+            // Set values for parameters
+            for (int i = 0; i < count; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+
+            // Execute update
+            ps.executeUpdate();
+
+            if (ps != null) {
+                ps.close();
+            }
+
+            if (AKTIFKANTRACKSQL.equals("yes")) {
+                // You may want to adjust this part based on your requirements
+                dicari = String.join("|", values);
+            }
+            SimpanTrack("INSERT INTO " + table + " (" + columns + ") VALUES (" + dicari + ")");
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+            if (e.toString().contains("Duplicate")) {
+                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Ada kesalahan Query...!");
+            }
+            return false;
+        }
+    }
+
     public boolean menyimpantf2(String table, String value, String sama, int i, String[] a) {
         bool = true;
         try {

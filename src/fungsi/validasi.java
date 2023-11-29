@@ -49,6 +49,7 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -754,6 +755,87 @@ public final class validasi {
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
                 jasperViewer.setSize(screen.width - 50, screen.height - 50);
                 jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                jasperViewer.setLocationRelativeTo(null);
+                jasperViewer.setVisible(true);
+            } catch (Exception rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null, "Report Can't view because : " + rptexcpt);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void MyReportqryabdulAntrian(String reportName, String reportDirName, String judul, String qry, Map parameters) {
+        Properties systemProp = System.getProperties();
+
+        // Ambil current dir
+        String currentDir = systemProp.getProperty("user.dir");
+
+        File dir = new File(currentDir);
+//        System.out.println(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+//        System.out.println(dir);
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+//                System.out.println(fileRpt);
+                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jrxml ada
+                    System.out.println("mencari report");
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                } // end if
+            } // end for i
+        } // end if
+
+        try {
+//            ps = connect.prepareStatement(qry);
+            try {
+                String namafile = "./" + reportDirName + "/" + reportName;
+//                rs = ps.executeQuery();
+//                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, new JREmptyDataSource());
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+
+                jasperViewer.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowOpened(java.awt.event.WindowEvent windowEvent) {
+                        // Close the viewer after a delay (adjust the sleep time as needed)
+                        try {
+                            Thread.sleep(3000); // 5000 milliseconds = 5 seconds
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        jasperViewer.setVisible(false); // Hide the viewer
+                        jasperViewer.dispose(); // Dispose of resources
+                    }
+                });
+                PrinterJob printerJob = PrinterJob.getPrinterJob();
+//                printerJob.setPrintService(printerJob.getPrintService());
+                PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+                printRequestAttributeSet.add(new Copies(1));
+                JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
+                exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, printerJob.getPrintService());
+                exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, false);
+                exporter.exportReport();
+
+                jasperViewer.setTitle(judul);
+                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                jasperViewer.setSize(500, 700);
+//                jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
                 jasperViewer.setLocationRelativeTo(null);
                 jasperViewer.setVisible(true);
             } catch (Exception rptexcpt) {
