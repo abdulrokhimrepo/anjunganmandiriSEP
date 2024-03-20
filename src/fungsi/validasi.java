@@ -32,9 +32,6 @@ import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
-import javax.print.attribute.standard.MediaPrintableArea;
-import javax.print.attribute.standard.MediaSize;
-import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -1363,6 +1360,19 @@ public final class validasi {
     public boolean ValidasiRegistrasi(String kodepoli, String kodedokter, String norm, String tglperiksa, String kodepj) {
         try {
             if (sek.cariInteger("select count(reg_periksa.no_rm) from reg_periksa where reg_periksa.kd_poli='" + kodepoli + "' and reg_periksa.kd_dokter='" + kodedokter + "' and reg_periksa.no_rkm_medis='" + norm + "' and reg_periksa.tgl_registrasi='" + tglperiksa + "' reg_periksa.kd_pj='" + kodepj + "'") > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+            return false;
+        }
+    }
+
+    public boolean ValidasiDOkterCuti(String kodedokter, String kodepoli) {
+        try {
+            if (sek.cariInteger("select count(jadwal_cuti_libur.kd_dokter) from jadwal_cuti_libur where jadwal_cuti_libur.tanggallibur='" + sek.cariIsi("select current_date") + "' and jadwal_cuti_libur.kd_dokter='" + kodedokter + "' and jadwal_cuti_libur.kd_poli='" + kodepoli + "' ") > 0) {
                 return true;
             } else {
                 return false;

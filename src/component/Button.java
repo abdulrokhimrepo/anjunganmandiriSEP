@@ -2,7 +2,6 @@ package component;
 
 import java.awt.Color;
 import java.awt.Insets;
-import javax.swing.JButton;
 
 /**
  *
