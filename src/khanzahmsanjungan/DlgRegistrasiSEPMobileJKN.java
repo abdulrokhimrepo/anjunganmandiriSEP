@@ -12,10 +12,8 @@ package khanzahmsanjungan;
 
 import bridging.ApiBPJS;
 import bridging.BPJSCekHistoriPelayanan;
-import bridging.BPJSCekReferensiDokterDPJP;
 import bridging.BPJSCekReferensiDokterDPJP1;
 import bridging.BPJSCekReferensiPenyakit;
-import bridging.BPJSCekReferensiPoli;
 import bridging.BPJSCekRiwayatRujukanTerakhir;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,9 +28,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -45,17 +40,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.bouncycastle.crypto.engines.TnepresEngine;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -1952,8 +1942,6 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                 kodedokterreg = Sequel.cariIsi("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs=?", KdDPJP.getText());
             }
 
-            //            kodepolireg = Sequel.cariIsi("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs=?", KdPoli.getText());
-            //            kodedokterreg = Sequel.cariIsi("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs=?", KdDPJP.getText());
             if (!kodepolireg.equals("")) {
                 isPoli();
             } else {
@@ -1963,7 +1951,9 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             isNumber();
 
             //cek apakah ada regisan sebelumnya
-            if (Valid.ValidasiRegistrasi(kodepolireg, kodedokterreg, TNoRM.getText(), Valid.SetTgl(TanggalSEP.getSelectedItem() + ""), Kdpnj.getText()) == true) {
+            if (Valid.ValidasiDOkterCuti(kodedokterreg, kodepolireg) == true) {
+                JOptionPane.showMessageDialog(rootPane, "Maaf, Dokter tidak berpraktek hari ini");
+            } else if (Valid.ValidasiRegistrasi(kodepolireg, kodedokterreg, TNoRM.getText(), Valid.SetTgl(TanggalSEP.getSelectedItem() + ""), Kdpnj.getText()) == true) {
                 JOptionPane.showMessageDialog(rootPane, "Maaf, Telah terdaftar pemeriksaan hari ini. Mohon konfirmasi ke Bagian Admisi");
                 emptTeks();
             } else {
@@ -2751,44 +2741,6 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     NmDPJP.setText(Sequel.cariIsi("select maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs='" + KdDPJP.getText() + "'"));
                     KdDPJPLayanan.setText(KdDPJP.getText());
                     NmDPJPLayanan.setText(NmDPJP.getText());
-
-//                    ps = koneksi.prepareStatement(
-//                            "select maping_dokter_dpjpvclaim.kd_dokter,maping_dokter_dpjpvclaim.kd_dokter_bpjs,maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim inner join jadwal "
-//                            + "on maping_dokter_dpjpvclaim.kd_dokter=jadwal.kd_dokter where jadwal.kd_poli=? and jadwal.hari_kerja=?");
-//                    try {
-//                        if (day == 1) {
-//                            hari = "AKHAD";
-//                        } else if (day == 2) {
-//                            hari = "SENIN";
-//                        } else if (day == 3) {
-//                            hari = "SELASA";
-//                        } else if (day == 4) {
-//                            hari = "RABU";
-//                        } else if (day == 5) {
-//                            hari = "KAMIS";
-//                        } else if (day == 6) {
-//                            hari = "JUMAT";
-//                        } else if (day == 7) {
-//                            hari = "SABTU";
-//                        }
-//
-//                        ps.setString(1, kdpoli.getText());
-//                        ps.setString(2, hari);
-//                        rs = ps.executeQuery();
-//                        if (rs.next()) {
-//                            KdDPJP.setText(rs.getString("kd_dokter_bpjs"));
-//                            NmDPJP.setText(rs.getString("nm_dokter_bpjs"));
-//                        }
-//                    } catch (Exception e) {
-//                        System.out.println("Notif : " + e);
-//                    } finally {
-//                        if (rs != null) {
-//                            rs.close();
-//                        }
-//                        if (ps != null) {
-//                            ps.close();
-//                        }
-//                    }
                 } else if (jeniskunjungan.equals("3 (Kontrol)")) {
                     String nosuratkontrol = Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorreferensi from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorkartu='" + nomorrujukan + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()");
                     String noSEP = Sequel.cariIsi("select bridging_surat_kontrol_bpjs.no_sep from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + nosuratkontrol + "'");
