@@ -10,7 +10,6 @@
  */
 package khanzahmsanjungan;
 
-import bridging.BPJSCekRujukanKartuPCare;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -524,7 +523,7 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (Sequel.cariInteger("select count(bridging_surat_kontrol_bpjs.no_surat) from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'") > 0) {
 //                if (Sequel.cariInteger("select DATEDIFF(bridging_surat_kontrol_bpjs.tgl_rencana,CURRENT_DATE) from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'") < 0) {
-//                    
+//
 //                }
                 String tanggalkontrol = Sequel.cariIsi("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat='" + NoRMPasien.getText() + "'");
                 if (Sequel.cariInteger("select DATEDIFF('" + tanggalkontrol + "',CURRENT_DATE)") > 0) {
@@ -537,6 +536,7 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                     form.tampilKontrol(NoRMPasien.getText());
+//                    form.tampilfingerprint(NoRMPasien.getText());
                     form.setSize(this.getWidth(), this.getHeight());
                     form.setLocationRelativeTo(jPanel1);
                     this.dispose();
@@ -570,6 +570,7 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                 form.tampilKontrol(NoRMPasien.getText());
+//                form.tampilfingerprint(NoRMPasien.getText());
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();

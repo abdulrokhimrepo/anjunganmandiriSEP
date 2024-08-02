@@ -157,6 +157,7 @@ public final class validasi {
 
     public void autoNomer3(String sql, String strAwal, Integer pnj, javax.swing.JTextField teks) {
         try {
+//            connect.setAutoCommit(false);
             ps = connect.prepareStatement(sql);
             try {
                 rs = ps.executeQuery();
@@ -171,7 +172,15 @@ public final class validasi {
                     s1 = s1 + "0";
                 }
                 teks.setText(strAwal + s1 + s);
+//                connect.commit();
             } catch (Exception e) {
+//                if (connect != null) {
+//                    try {
+//                        connect.rollback(); // Rollback transaction on error
+//                    } catch (SQLException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
                 System.out.println("Notifikasi : " + e);
                 JOptionPane.showMessageDialog(null, "Maaf, Query tidak bisa dijalankan...!!!!");
             } finally {
@@ -912,12 +921,7 @@ public final class validasi {
 
     public void MyReportSilentPrint(String reportName, Map parameters, String title) {
         try {
-            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./report/" + reportName, parameters, connect), false);
             JasperPrint jasperPrint = JasperFillManager.fillReport("./report/" + reportName, parameters, connect);
-//            jasperViewer.setTitle(title);
-//            jasperViewer.setLocationRelativeTo(null);
-//            jasperViewer.setVisible(true);
-
             PrinterJob printerJob = PrinterJob.getPrinterJob();
             PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
             int selectedService = 0;
@@ -929,20 +933,21 @@ public final class validasi {
                     System.out.println("Daftar printer dipilih: " + services[i].getName().toString());
                     selectedService = i;
                     System.out.println("index printer dipilih : " + i);
+
+                    printerJob.setPrintService(services[selectedService]);
+                    PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+                    printRequestAttributeSet.add(new Copies(4));
+                    JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, services[selectedService]);
+                    exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, services[selectedService].getAttributes());
+                    exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
+                    exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
+                    exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
+                    exporter.exportReport();
                 }
             }
-            printerJob.setPrintService(services[selectedService]);
-            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
-            printRequestAttributeSet.add(new Copies(3));
-            JRPrintServiceExporter exporter = new JRPrintServiceExporter();
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, services[selectedService]);
-            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, services[selectedService].getAttributes());
-            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
-            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
-            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
-            exporter.exportReport();
-            //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
+
         } catch (Exception ex) {
             System.out.println("Notifikasi : " + ex);
         }
