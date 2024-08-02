@@ -10,23 +10,17 @@
  */
 package khanzahmsanjungan;
 
-import bridging.BPJSCekRujukanKartuPCare;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -755,9 +749,10 @@ public class DlgCekBooking extends javax.swing.JDialog {
                             NoRMPasien.getText(), Sequel.cariIsi("select current_date()"), rs.getString(5), rs.getString(6)
                         });
                         Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{NoRMPasien.getText()});
-
-                        JOptionPane.showMessageDialog(rootPane, "Berhasil");
                         MnCetakRegisterActionPerformed(NoRawat.getText());
+                        if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
+                            MnCetakBarcodeRawatJalan(NoRawat.getText());
+                        }
                         NoRMPasien.setText("");
                         NoRawat.setText("");
                         status = "Baru";
@@ -766,6 +761,7 @@ public class DlgCekBooking extends javax.swing.JDialog {
                         TPngJwb.setText("");
                         TAlmt.setText("");
                         THbngn.setText("");
+                        JOptionPane.showMessageDialog(rootPane, "Berhasil");
                         this.dispose();
 
                     }
@@ -829,5 +825,21 @@ public class DlgCekBooking extends javax.swing.JDialog {
             });
 
         }
+    }
+
+    private void MnCetakBarcodeRawatJalan(String norawat) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("emailrs", akses.getemailrs());
+        param.put("no_rawat", norawat);
+        param.put("logo", Sequel.cariGambar("select logo from setting"));
+        Valid.MyReportSilentPrint("rptBarcodeRawat3.jasper", param, "::[ Barcode No.RM ]::");
+        this.setCursor(Cursor.getDefaultCursor());
+
     }
 }

@@ -10,23 +10,16 @@
  */
 package khanzahmsanjungan;
 
-import bridging.BPJSCekRujukanKartuPCare;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -498,6 +491,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                     form.tampilPecahSEP(NoRMPasien.getText());
+                    form.tampilfingerprint(NoRMPasien.getText());
                     form.setSize(this.getWidth(), this.getHeight());
                     form.setLocationRelativeTo(jPanel1);
                     this.dispose();
@@ -507,6 +501,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                     form.tampilPecahSEP(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'"));
+                    form.tampilfingerprint(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'"));
                     form.setSize(this.getWidth(), this.getHeight());
                     form.setLocationRelativeTo(jPanel1);
                     this.dispose();
@@ -517,6 +512,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                     form.tampilPecahSEP(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
+                    form.tampilfingerprint(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
                     form.setSize(this.getWidth(), this.getHeight());
                     form.setLocationRelativeTo(jPanel1);
                     this.dispose();
@@ -545,6 +541,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                 form.tampilPecahSEP(NoRMPasien.getText());
+                form.tampilfingerprint(NoRMPasien.getText());
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
@@ -554,6 +551,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                 form.tampilPecahSEP(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'"));
+                form.tampilfingerprint(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'"));
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
@@ -564,6 +562,7 @@ public class DlgCekKunjunganBedaPoli extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
                 form.tampilPecahSEP(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
+                form.tampilfingerprint(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();

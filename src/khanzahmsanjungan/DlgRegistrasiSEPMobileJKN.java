@@ -27,6 +27,8 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -46,6 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -1915,6 +1918,8 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             Valid.textKosong(KdPenyakit, "Diagnosa");
         } else if (Catatan.getText().trim().equals("")) {
             Valid.textKosong(Catatan, "Catatan");
+        } else if (NoTelp.getText().trim().equals("")) {
+            Valid.textKosong(NoTelp, "No telpon");
         } else if ((JenisPelayanan.getSelectedIndex() == 1) && (KdPoli.getText().trim().equals("") || NmPoli.getText().trim().equals(""))) {
             Valid.textKosong(KdPoli, "Poli Tujuan");
         } else if ((LakaLantas.getSelectedIndex() == 1) && Keterangan.getText().equals("")) {
@@ -2579,7 +2584,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     KdDPJPLayanan.getText(),
                     NmDPJPLayanan.getText()
                 }) == true) {
-                    MnCetakRegisterActionPerformed(TNoRw.getText());
+
                     Sequel.queryu2("update referensi_mobilejkn_bpjs set validasi=now() where nomorkartu=? and tanggalperiksa=? and kodedokter=? and kodepoli=? ", 4, new String[]{
                         NoKartu.getText(), Valid.SetTgl(TanggalSEP.getSelectedItem().toString()), KdDPJP.getText(), KdPoli.getText()
                     });
@@ -2602,6 +2607,10 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     Sequel.queryu2("update booking_registrasi set waktu_kunjungan=now() where no_rkm_medis=? and tanggal_periksa=? and kd_dokter=? and kd_poli=? ", 4, new String[]{
                         TNoRM.getText(), Valid.SetTgl(TanggalSEP.getSelectedItem().toString()), kodedokterreg, kodepolireg
                     });
+                }
+                MnCetakRegisterActionPerformed(TNoRw.getText());
+                if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
+                    MnCetakBarcodeRawatJalan(TNoRw.getText());
                 }
                 emptTeks();
                 dispose();
@@ -3096,14 +3105,71 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                             Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
                                 TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
                             });
+
+                            //hit antrol kedua
+                            if (!NoRujukan.getText().equals("")) {
+                                try {
+                                    headers = new HttpHeaders();
+                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                    headers.add("x-cons-id", koneksiDB.CONSIDAPIMOBILEJKN());
+                                    utc = String.valueOf(api.GetUTCdatetimeAsString());
+                                    headers.add("x-timestamp", utc);
+                                    headers.add("x-signature", api.getHmac(utc));
+                                    headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
+                                    requestJson = "{"
+                                            + "\"kodebooking\": \"" + TNoRw.getText().replaceAll("/", "") + "\","
+                                            + "\"jenispasien\": \"JKN\","
+                                            + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
+                                            + "\"nik\": \"" + NIK.getText() + "\","
+                                            + "\"nohp\": \"" + NoTelp.getText() + "\","
+                                            + "\"kodepoli\": \"" + KdPoli.getText() + "\","
+                                            + "\"namapoli\": \"" + NmPoli.getText() + "\","
+                                            + "\"pasienbaru\": 0,"
+                                            + "\"norm\": \"" + TNoRM.getText() + "\","
+                                            + "\"tanggalperiksa\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
+                                            + "\"kodedokter\": " + KdDPJP.getText() + ","
+                                            + "\"namadokter\": \"" + NmDPJP.getText() + "\","
+                                            + "\"jampraktek\": \"" + jammulai.substring(0, 5) + "-" + jamselesai.substring(0, 5) + "\","
+                                            + "\"jeniskunjungan\": " + jeniskunjungan + ","
+                                            + "\"nomorreferensi\": \"" + NoRujukan.getText() + "\","
+                                            + "\"nomorantrean\": \"" + NoReg.getText() + "\","
+                                            + "\"angkaantrean\": " + Integer.parseInt(NoReg.getText()) + ","
+                                            + "\"estimasidilayani\": " + parsedDate.getTime() + ","
+                                            + "\"sisakuotajkn\": " + (kuota - Integer.parseInt(NoReg.getText())) + ","
+                                            + "\"kuotajkn\": " + kuota + ","
+                                            + "\"sisakuotanonjkn\": " + (kuota - Integer.parseInt(NoReg.getText())) + ","
+                                            + "\"kuotanonjkn\": " + kuota + ","
+                                            + "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\""
+                                            + "}";
+                                    System.out.println("JSON : " + requestJson + "\n");
+                                    requestEntity = new HttpEntity(requestJson, headers);
+                                    URL = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
+                                    System.out.println("URL Kirim Pakai No.Rujuk : " + URL);
+                                    root
+                                            = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class
+                                            ).getBody());
+                                    nameNode = root.path("metadata");
+                                    if (nameNode.path("code").asText().equals("200")) {
+                                        Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status200", "?,?,?,?,?,?,?,?", 8, new String[]{
+                                            TNoRw.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
+                                        });
+                                        Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + TNoRw.getText().toString() + "'");
+                                    } else {
+                                        Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
+                                            TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
+                                        });
+                                    }
+                                    System.out.println("respon WS BPJS No Rujuk : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
+                                } catch (Exception e) {
+                                    System.out.println("Notif No.Rujuk : " + e);
+                                }
+                            }
                         }
                         System.out.println("respon WS BPJS Kirim Pakai SKDP : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
                     } catch (Exception e) {
                         System.out.println("Notif SKDP : " + e);
                     }
-                }
-
-                if (!NoRujukan.getText().equals("")) {
+                } else if (!NoRujukan.getText().equals("")) {
                     try {
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3161,6 +3227,63 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     }
                 }
 
+//                if (!NoRujukan.getText().equals("")) {
+//                    try {
+//                        headers = new HttpHeaders();
+//                        headers.setContentType(MediaType.APPLICATION_JSON);
+//                        headers.add("x-cons-id", koneksiDB.CONSIDAPIMOBILEJKN());
+//                        utc = String.valueOf(api.GetUTCdatetimeAsString());
+//                        headers.add("x-timestamp", utc);
+//                        headers.add("x-signature", api.getHmac(utc));
+//                        headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
+//                        requestJson = "{"
+//                                + "\"kodebooking\": \"" + TNoRw.getText().replaceAll("/", "") + "\","
+//                                + "\"jenispasien\": \"JKN\","
+//                                + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
+//                                + "\"nik\": \"" + NIK.getText() + "\","
+//                                + "\"nohp\": \"" + NoTelp.getText() + "\","
+//                                + "\"kodepoli\": \"" + KdPoli.getText() + "\","
+//                                + "\"namapoli\": \"" + NmPoli.getText() + "\","
+//                                + "\"pasienbaru\": 0,"
+//                                + "\"norm\": \"" + TNoRM.getText() + "\","
+//                                + "\"tanggalperiksa\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
+//                                + "\"kodedokter\": " + KdDPJP.getText() + ","
+//                                + "\"namadokter\": \"" + NmDPJP.getText() + "\","
+//                                + "\"jampraktek\": \"" + jammulai.substring(0, 5) + "-" + jamselesai.substring(0, 5) + "\","
+//                                + "\"jeniskunjungan\": " + jeniskunjungan + ","
+//                                + "\"nomorreferensi\": \"" + NoRujukan.getText() + "\","
+//                                + "\"nomorantrean\": \"" + NoReg.getText() + "\","
+//                                + "\"angkaantrean\": " + Integer.parseInt(NoReg.getText()) + ","
+//                                + "\"estimasidilayani\": " + parsedDate.getTime() + ","
+//                                + "\"sisakuotajkn\": " + (kuota - Integer.parseInt(NoReg.getText())) + ","
+//                                + "\"kuotajkn\": " + kuota + ","
+//                                + "\"sisakuotanonjkn\": " + (kuota - Integer.parseInt(NoReg.getText())) + ","
+//                                + "\"kuotanonjkn\": " + kuota + ","
+//                                + "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\""
+//                                + "}";
+//                        System.out.println("JSON : " + requestJson + "\n");
+//                        requestEntity = new HttpEntity(requestJson, headers);
+//                        URL = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
+//                        System.out.println("URL Kirim Pakai No.Rujuk : " + URL);
+//                        root
+//                                = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class
+//                                ).getBody());
+//                        nameNode = root.path("metadata");
+//                        if (nameNode.path("code").asText().equals("200")) {
+//                            Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status200", "?,?,?,?,?,?,?,?", 8, new String[]{
+//                                TNoRw.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
+//                            });
+//                            Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + TNoRw.getText().toString() + "'");
+//                        } else {
+//                            Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
+//                                TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
+//                            });
+//                        }
+//                        System.out.println("respon WS BPJS : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
+//                    } catch (Exception e) {
+//                        System.out.println("Notif No.Rujuk : " + e);
+//                    }
+//                }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
@@ -3459,6 +3582,36 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             });
 
         }
+    }
+
+    public void tampilfingerprint(String nokapasien) {
+        // Add a delay of 2 seconds
+        // Add a delay of 2 seconds using Swing Timer
+        Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Call the method after the delay
+                BukaFingerPrint(nokapasien);
+            }
+        });
+        timer.setRepeats(false); // Execute the timer only once
+        timer.start();
+    }
+
+    private void MnCetakBarcodeRawatJalan(String norawat) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("emailrs", akses.getemailrs());
+        param.put("no_rawat", norawat);
+        param.put("logo", Sequel.cariGambar("select logo from setting"));
+        Valid.MyReportSilentPrint("rptBarcodeRawat3.jasper", param, "::[ Barcode No.RM ]::");
+        this.setCursor(Cursor.getDefaultCursor());
+
     }
 
 }

@@ -10,23 +10,16 @@
  */
 package khanzahmsanjungan;
 
-import bridging.BPJSCekRujukanKartuPCare;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -494,6 +487,7 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
                 form.tampil(NoRMPasien.getText());
+                form.tampilfingerprint(NoRMPasien.getText());
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
@@ -503,6 +497,7 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
                 form.tampil(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+                form.tampilfingerprint(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
@@ -527,6 +522,7 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
             form.tampil(NoRMPasien.getText());
+            form.tampilfingerprint(NoRMPasien.getText());
             form.setSize(this.getWidth(), this.getHeight());
             form.setLocationRelativeTo(jPanel1);
             this.dispose();
@@ -536,6 +532,7 @@ public class DlgCekinMobileJKN extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgRegistrasiSEPMobileJKN form = new DlgRegistrasiSEPMobileJKN(null, true);
             form.tampil(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+            form.tampilfingerprint(Sequel.cariIsi("select referensi_mobilejkn_bpjs.nomorkartu from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.norm='" + NoRMPasien.getText() + "' and referensi_mobilejkn_bpjs.status='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
             form.setSize(this.getWidth(), this.getHeight());
             form.setLocationRelativeTo(jPanel1);
             this.dispose();

@@ -18,9 +18,6 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -32,15 +29,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
-import org.bouncycastle.crypto.engines.TnepresEngine;
 
 /**
  *
@@ -371,7 +364,7 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
         jPanel2.add(jLabel31);
         jLabel31.setBounds(20, 140, 250, 40);
 
-        TanggalPeriksa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2023" }));
+        TanggalPeriksa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-05-2024" }));
         TanggalPeriksa.setDisplayFormat("dd-MM-yyyy");
         TanggalPeriksa.setOpaque(false);
         TanggalPeriksa.setPreferredSize(new java.awt.Dimension(95, 23));
@@ -654,7 +647,10 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
                         "Lama", "Ralan", "A09", umur, sttsumur, "Belum Bayar", status}) == true) {
 //                Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{TNoRM.getText()});
                 MnCetakRegisterActionPerformed(NoRawat.getText());
-//                MnCetakBarcodeRawatJalan(NoRawat.getText());
+                if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
+                    MnCetakBarcodeRawatJalan(NoRawat.getText());
+                }
+
                 NoReg.setText("");
                 TNoRw.setText("");
                 NoRawat.setText("");
