@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import org.json.JSONObject;
 
 /**
  *
@@ -753,6 +754,22 @@ public class DlgCekBooking extends javax.swing.JDialog {
                         if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
                             MnCetakBarcodeRawatJalan(NoRawat.getText());
                         }
+
+                        //kirimsocket
+                        // Create a JSONObject with the necessary data
+                        String datajam = Sequel.cariIsi("select current_date()") + " " + Sequel.cariIsi("select current_time()");
+                        JSONObject jsonData = new JSONObject();
+                        try {
+                            jsonData.put("NoRawat", NoRawat.getText());
+                            jsonData.put("TaskID", "3"); // Add more fields as needed
+                            jsonData.put("WaktuTaskID", datajam);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        // Pass the JSON data to the WebSocket method
+                        Valid.webSocket(jsonData, "encounterkirim");
+
                         NoRMPasien.setText("");
                         NoRawat.setText("");
                         status = "Baru";
