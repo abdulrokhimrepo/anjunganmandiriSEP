@@ -30,7 +30,7 @@ public class koneksiDB {
         if (connection == null) {
             try {
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                dataSource.setURL("jdbc:mysql://" + EnkripsiAES.decrypt(prop.getProperty("HOST")) + ":" + EnkripsiAES.decrypt(prop.getProperty("PORT")) + "/" + EnkripsiAES.decrypt(prop.getProperty("DATABASE")) + "?zeroDateTimeBehavior=convertToNull");
+                dataSource.setURL("jdbc:mysql://" + EnkripsiAES.decrypt(prop.getProperty("HOST")) + ":" + EnkripsiAES.decrypt(prop.getProperty("PORT")) + "/" + EnkripsiAES.decrypt(prop.getProperty("DATABASE")) + "?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
                 connection = dataSource.getConnection();
@@ -255,6 +255,16 @@ public class koneksiDB {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var = prop.getProperty("URLAPLIKASIFINGERPRINTBPJS");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String URLAPLIKASIFRISTA() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("URLAPLIKASIFRISTA");
         } catch (Exception e) {
             var = "";
         }
@@ -825,6 +835,26 @@ public class koneksiDB {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var = EnkripsiAES.decrypt(prop.getProperty("KEYWSLICA"));
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String AKTIFKANREALTIMEKIRIM() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("AKTIFKANREALTIMEKIRIM");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String URLWEBSOCKET() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("URLWEBSOCKET");
         } catch (Exception e) {
             var = "";
         }

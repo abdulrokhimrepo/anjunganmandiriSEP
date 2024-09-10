@@ -55,6 +55,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.view.JasperViewer;
+import org.json.JSONObject;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -1385,6 +1386,22 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
             return false;
+        }
+    }
+
+    public void webSocket(JSONObject jsonData, String event) {
+        if (koneksiDB.AKTIFKANREALTIMEKIRIM().equals("aktif")) {
+            String uri = koneksiDB.URLWEBSOCKET();
+
+            // Add the event to the JSON data if needed
+//            try {
+//                jsonData.put("Event", event);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            // Initialize and connect the WebSocket with the provided JSON data
+            webSocket myWebSocket = new webSocket(uri, jsonData, event);
+            myWebSocket.connect();
         }
     }
 

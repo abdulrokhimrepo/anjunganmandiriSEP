@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import org.json.JSONObject;
 
 /**
  *
@@ -637,6 +638,70 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
                 generalconsentsave(lblNoRM.getText());
             }
         } else {
+//            try {
+//                koneksi.setAutoCommit(false);
+//
+//                // Acquire lock
+//                Statement lockStmt = koneksi.createStatement();
+//                lockStmt.execute("LOCK TABLES reg_periksa WRITE");
+//
+//                // Generate primary key, do the transaction
+//                isNumber();
+//                String biayareg = Sequel.cariIsi("SELECT registrasilama FROM poliklinik WHERE kd_poli='" + kode_poli + "'");
+//                UpdateUmur();
+//                isCekPasien();
+//                if (Sequel.menyimpantf2("reg_periksa", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "No.Rawat", 19,
+//                        new String[]{NoReg.getText(), NoRawat.getText(), Valid.SetTgl(TanggalPeriksa.getSelectedItem() + ""), Sequel.cariIsi("select current_time()"),
+//                            kode_dokter, lblNoRM.getText(), kode_poli, TPngJwb.getText(), TAlmt.getText(), THbngn.getText(), biayareg, "Belum",
+//                            "Lama", "Ralan", "A09", umur, sttsumur, "Belum Bayar", status}) == true) {
+//                    MnCetakRegisterActionPerformed(NoRawat.getText());
+//                    if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
+//                        MnCetakBarcodeRawatJalan(NoRawat.getText());
+//                    }
+//                    NoReg.setText("");
+//                    TNoRw.setText("");
+//                    NoRawat.setText("");
+//                    lblNoRM.setText("");
+//                    TPngJwb.setText("");
+//                    TAlmt.setText("");
+//                    THbngn.setText("");
+//                    umur = "";
+//                    sttsumur = "";
+//                    kode_poli = "";
+//                    NamaPoli.setText("");
+//                    NamaDokter.setText("");
+//                    kode_dokter = "";
+//                    JOptionPane.showMessageDialog(rootPane, "Berhasil");
+//                    this.dispose();
+//
+//                }
+//
+//                // Commit transaction
+//                koneksi.commit();
+//
+//                // Release lock
+//                Statement unlockStmt = koneksi.createStatement();
+//                unlockStmt.execute("UNLOCK TABLES");
+//            } catch (SQLException e) {
+//                if (koneksi != null) {
+//                    try {
+//                        koneksi.rollback();
+//                    } catch (SQLException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
+//                e.printStackTrace();
+//            } finally {
+//                if (koneksi != null) {
+//                    try {
+//                        koneksi.setAutoCommit(true);
+//                        koneksi.close();
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+
             isNumber();
             String biayareg = Sequel.cariIsi("SELECT registrasilama FROM poliklinik WHERE kd_poli='" + kode_poli + "'");
             UpdateUmur();
@@ -645,11 +710,27 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
                     new String[]{NoReg.getText(), NoRawat.getText(), Valid.SetTgl(TanggalPeriksa.getSelectedItem() + ""), Sequel.cariIsi("select current_time()"),
                         kode_dokter, lblNoRM.getText(), kode_poli, TPngJwb.getText(), TAlmt.getText(), THbngn.getText(), biayareg, "Belum",
                         "Lama", "Ralan", "A09", umur, sttsumur, "Belum Bayar", status}) == true) {
-//                Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{TNoRM.getText()});
+
                 MnCetakRegisterActionPerformed(NoRawat.getText());
+
                 if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
                     MnCetakBarcodeRawatJalan(NoRawat.getText());
                 }
+
+                //kirimsocket
+                // Create a JSONObject with the necessary data
+                String datajam = Valid.SetTgl(TanggalPeriksa.getSelectedItem() + "") + " " + Sequel.cariIsi("select current_time()");
+                JSONObject jsonData = new JSONObject();
+                try {
+                    jsonData.put("NoRawat", TNoRw.getText());
+                    jsonData.put("TaskID", "3"); // Add more fields as needed
+                    jsonData.put("WaktuTaskID", datajam);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Pass the JSON data to the WebSocket method
+                Valid.webSocket(jsonData, "encounterkirim");
 
                 NoReg.setText("");
                 TNoRw.setText("");
@@ -666,10 +747,10 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
                 NamaDokter.setText("");
                 kode_dokter = "";
                 JOptionPane.showMessageDialog(rootPane, "Berhasil");
+
                 this.dispose();
 
             }
-
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
