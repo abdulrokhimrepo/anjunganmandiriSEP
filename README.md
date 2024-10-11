@@ -41,7 +41,7 @@ Java
 ## Deployment
 
 Silahkan lakukan deploy, dan tempatkan pada folder utama SIMRS Khanza.
-Tambahkan konfigurasi berikut pada setting.xml
+Tambahkan konfigurasi berikut pada database.xml
 Tambahkan table pada database dengan file SQL di folder tambahan Table.
 Tambahkan lib yg ada pada folder tambahan lib
 Anjungan ini menggunakan versi aplikasi FP BPJS v 2.0(harus login setiap akan rekan FP)
