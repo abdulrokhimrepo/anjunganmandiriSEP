@@ -937,7 +937,7 @@ public final class validasi {
 
                     printerJob.setPrintService(services[selectedService]);
                     PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
-                    printRequestAttributeSet.add(new Copies(4));
+                    printRequestAttributeSet.add(new Copies(3));
                     JRPrintServiceExporter exporter = new JRPrintServiceExporter();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
                     exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, services[selectedService]);

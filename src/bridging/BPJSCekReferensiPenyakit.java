@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -22,11 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import org.springframework.http.HttpEntity;
@@ -140,7 +137,6 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         diagnosa = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
-        BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -171,7 +167,7 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel16.setText("Kode/Nama Diagnosa :");
+        jLabel16.setText("Keyword");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(120, 23));
         panelGlass6.add(jLabel16);
@@ -206,19 +202,6 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
         panelGlass6.add(jLabel17);
 
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        panelGlass6.add(BtnPrint);
-
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
@@ -252,14 +235,14 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             dispose();
         } else {
-            Valid.pindah(evt, BtnPrint, BtnKeluar);
+
         }
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void diagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diagnosaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             tampil(diagnosa.getText());
-            BtnPrint.requestFocus();
+
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             tampil(diagnosa.getText());
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
@@ -283,7 +266,7 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindah(evt, diagnosa, BtnPrint);
+
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -292,36 +275,6 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_tbKamarMouseClicked
-
-    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if (tabMode.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            //TCari.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-            Sequel.queryu("truncate table temporary");
-            int row = tabMode.getRowCount();
-            for (int r = 0; r < row; r++) {
-                Sequel.menyimpan("temporary", "'0','"
-                        + tabMode.getValueAt(r, 0).toString() + "','"
-                        + tabMode.getValueAt(r, 1).toString() + "','"
-                        + tabMode.getValueAt(r, 2).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''", "Rekap Harian Pengadaan Ipsrs");
-            }
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars", akses.getnamars());
-            param.put("alamatrs", akses.getalamatrs());
-            param.put("kotars", akses.getkabupatenrs());
-            param.put("propinsirs", akses.getpropinsirs());
-            //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
-            param.put("kontakrs", akses.getkontakrs());
-            param.put("emailrs", akses.getemailrs());
-            param.put("logo", Sequel.cariGambar("select logo from setting"));
-            Valid.MyReport("rptCariBPJSReferensiDiagnosa.jasper", "report", "[ Pencarian Referensi Diagnosa ]", param);
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-    }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,7 +295,6 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
-    private widget.Button BtnPrint;
     private widget.ScrollPane Scroll;
     private widget.TextBox diagnosa;
     private widget.InternalFrame internalFrame1;

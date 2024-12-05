@@ -851,6 +851,16 @@ public class koneksiDB {
         return var;
     }
 
+    public static String AKTIFKANWAJIBANTROL() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("AKTIFKANWAJIBANTROL");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
     public static String URLWEBSOCKET() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
