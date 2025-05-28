@@ -1,36 +1,30 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 package bridging;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.batasInput;
+import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.batasInput;
-import fungsi.validasi;
-import fungsi.sekuel;
-import fungsi.koneksiDB;
-import groovy.lang.Sequence;
-import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JOptionPane;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -70,7 +64,7 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         this.setLocation(10, 2);
         setSize(628, 674);
 
-        Object[] row = {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No.Kartu", "No.SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl.SEP"};
+        Object[] row = {"No.", "Diagnosa", "Pelayanan", "Kelas", "Nama Peserta", "No.Kartu", "No.SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl.SEP"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -86,25 +80,28 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         for (i = 0; i < 12; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(50);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 1) {
                 column.setPreferredWidth(230);
             } else if (i == 2) {
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(120);
             } else if (i == 3) {
-                column.setPreferredWidth(150);
-            } else if (i == 4) {
-                column.setPreferredWidth(160);
-            } else if (i == 5) {
-                column.setPreferredWidth(150);
-            } else if (i == 6) {
                 column.setPreferredWidth(125);
+            } else if (i == 4) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else if (i == 5) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else if (i == 6) {
+                column.setPreferredWidth(250);
             } else if (i == 7) {
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(250);
             } else if (i == 8) {
-                column.setPreferredWidth(115);
+                column.setPreferredWidth(80);
             } else if (i == 9) {
-                column.setPreferredWidth(160);
+                column.setPreferredWidth(300);
             } else if (i == 10) {
                 column.setPreferredWidth(150);
             } else if (i == 11) {
@@ -143,7 +140,6 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelGlass6 = new widget.panelisi();
-        jLabel29 = new widget.Label();
         jLabel19 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
@@ -161,7 +157,7 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Histori Pelayanan BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 131, 62), 3, true), "::[ Histori Pelayanan BPJS ]::", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 18), new java.awt.Color(0, 131, 62))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -183,23 +179,17 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setText("Klik pada kolom nomor SEP apabila ingin mengambil No SEP");
-        jLabel29.setName("jLabel29"); // NOI18N
-        jLabel29.setPreferredSize(new java.awt.Dimension(400, 23));
-        panelGlass6.add(jLabel29);
-
         jLabel19.setText("Periode :");
         jLabel19.setName("jLabel19"); // NOI18N
         jLabel19.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass6.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
-        DTPCari1.setPreferredSize(new java.awt.Dimension(90, 23));
+        DTPCari1.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass6.add(DTPCari1);
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -209,11 +199,11 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
         panelGlass6.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
-        DTPCari2.setPreferredSize(new java.awt.Dimension(90, 23));
+        DTPCari2.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass6.add(DTPCari2);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
@@ -328,7 +318,6 @@ public final class BPJSCekHistoriPelayanan extends javax.swing.JDialog {
     private widget.Label jLabel17;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
-    private widget.Label jLabel29;
     private widget.panelisi panelGlass6;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables

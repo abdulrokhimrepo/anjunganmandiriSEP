@@ -686,7 +686,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         });
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         Tanggal.setOpaque(false);
@@ -703,7 +703,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         WindowBiometrik.setResizable(false);
         WindowBiometrik.setType(java.awt.Window.Type.POPUP);
 
-        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true), "VERIFIKASI BIOMETRIK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 131, 62), 5, true), "VERIFIKASI BIOMETRIK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 14), new java.awt.Color(0, 131, 62))); // NOI18N
         internalFrame9.setFont(new java.awt.Font("Poppins", 0, 15)); // NOI18N
         internalFrame9.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -801,7 +801,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         jLabel20.setBounds(660, 130, 70, 30);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2024" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -822,7 +822,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         jLabel22.setBounds(650, 160, 80, 30);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2024" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -1108,7 +1108,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         jLabel38.setBounds(650, 280, 80, 30);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2024" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -1477,6 +1477,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         jPanel2.add(btnDiagnosaAwal1);
         btnDiagnosaAwal1.setBounds(570, 100, 40, 30);
 
+        btnDiagnosaAwal2.setForeground(new java.awt.Color(0, 131, 62));
         btnDiagnosaAwal2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pilih.png"))); // NOI18N
         btnDiagnosaAwal2.setMnemonic('X');
         btnDiagnosaAwal2.setText("Riwayat Layanan BPJS");
@@ -1567,6 +1568,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
         jPanel2.add(jLabel57);
         jLabel57.setBounds(670, 190, 58, 30);
 
+        btnDiagnosaAwal3.setForeground(new java.awt.Color(0, 131, 62));
         btnDiagnosaAwal3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/approvalfp.png"))); // NOI18N
         btnDiagnosaAwal3.setMnemonic('X');
         btnDiagnosaAwal3.setText("Approval FP BPJS");
@@ -1584,8 +1586,9 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             }
         });
         jPanel2.add(btnDiagnosaAwal3);
-        btnDiagnosaAwal3.setBounds(1040, 300, 190, 50);
+        btnDiagnosaAwal3.setBounds(1040, 300, 220, 50);
 
+        btnDiagnosaAwal4.setForeground(new java.awt.Color(0, 131, 62));
         btnDiagnosaAwal4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pengajuan.png"))); // NOI18N
         btnDiagnosaAwal4.setMnemonic('X');
         btnDiagnosaAwal4.setText("Pengajuan FP BPJS");
@@ -1603,7 +1606,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             }
         });
         jPanel2.add(btnDiagnosaAwal4);
-        btnDiagnosaAwal4.setBounds(1040, 240, 190, 50);
+        btnDiagnosaAwal4.setBounds(1040, 240, 220, 50);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -1998,7 +2001,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         cekFinger(NoKartu.getText());
-        if (TNoRw.getText().trim().equals("") || TPasien.getText().trim().equals("")) {
+        if (lblNoRawat.getText().trim().equals("") || TPasien.getText().trim().equals("")) {
             Valid.textKosong(TNoRw, "Pasien");
         } else if (NoKartu.getText().trim().equals("")) {
             Valid.textKosong(NoKartu, "Nomor Kartu");
@@ -2064,11 +2067,15 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(rootPane, "Maaf, sebelumnya sudah dilakukan 3x pembuatan SEP di jenis pelayanan yang sama..!!");
 
                         } else {
-                            if ((!kodedokterreg.equals("")) && (!kodepolireg.equals(""))) {
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                SimpanAntrianOnSite();
-                                this.setCursor(Cursor.getDefaultCursor());
+
+                            if (koneksiDB.ADDANTROLMOBILEJKN().equals("aktif")) {
+                                if ((!kodedokterreg.equals("")) && (!kodepolireg.equals(""))) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    SimpanAntrianOnSite();
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                }
                             }
+
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             insertSEP();
                             this.setCursor(Cursor.getDefaultCursor());
@@ -2077,10 +2084,12 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         if (Sequel.cariInteger("select count(bridging_sep.no_kartu) from bridging_sep where bridging_sep.no_kartu='" + no_peserta + "' and bridging_sep.jnspelayanan='" + JenisPelayanan.getSelectedItem().toString().substring(0, 1) + "' and bridging_sep.tglsep like '%" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "%' and bridging_sep.nmpolitujuan not like '%darurat%'") >= 1) {
                             JOptionPane.showMessageDialog(rootPane, "Maaf, sebelumnya sudah dilakukan pembuatan SEP di jenis pelayanan yang sama..!!");
                         } else {
-                            if ((!kodedokterreg.equals("")) && (!kodepolireg.equals(""))) {
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                SimpanAntrianOnSite();
-                                this.setCursor(Cursor.getDefaultCursor());
+                            if (koneksiDB.ADDANTROLMOBILEJKN().equals("aktif")) {
+                                if ((!kodedokterreg.equals("")) && (!kodepolireg.equals(""))) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    SimpanAntrianOnSite();
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                }
                             }
 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2616,17 +2625,16 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Respon BPJS : " + nameNode.path("message").asText());
             if (nameNode.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("sep").path("noSep");
-
                 Sequel.mengedit("pasien", "no_rkm_medis=?", "umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))", 1, new String[]{TNoRM.getText()});
                 Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(rujuk_masuk.no_rawat,4),signed)),0) from reg_periksa inner join rujuk_masuk on reg_periksa.no_rawat=rujuk_masuk.no_rawat where reg_periksa.tgl_registrasi='" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "' ", "BR/" + dateformat.format(TanggalSEP.getDate()) + "/", 4, NoRujukMasuk);
                 Sequel.menyimpan("rujuk_masuk", "?,?,?,?,?,?,?,?,?,?", 10, new String[]{
-                    TNoRw.getText(), NmPpkRujukan.getText(), "-", NoRujukan.getText(), "0", NmPpkRujukan.getText(), KdPenyakit.getText(), "-",
+                    lblNoRawat.getText(), NmPpkRujukan.getText(), "-", NoRujukan.getText(), "0", NmPpkRujukan.getText(), KdPenyakit.getText(), "-",
                     "-", NoRujukMasuk.getText()
                 });
 
                 if (Sequel.menyimpantf2("bridging_sep", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "SEP", 52, new String[]{
                     response.asText(),
-                    TNoRw.getText(),
+                    lblNoRawat.getText(),
                     Valid.SetTgl(TanggalSEP.getSelectedItem() + ""),
                     Valid.SetTgl(TanggalRujuk.getSelectedItem() + ""),
                     NoRujukan.getText(),
@@ -2687,7 +2695,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     });
 
                     Sequel.queryu2("update reg_periksa set jam_reg='" + Sequel.cariIsi("select current_time()") + "' where no_rawat=? ", 1, new String[]{
-                        TNoRw.getText()
+                        lblNoRawat.getText()
                     });
                 }
 
@@ -2707,10 +2715,10 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                     });
                 }
 
-                MnCetakRegisterActionPerformed(TNoRw.getText());
+                MnCetakRegisterActionPerformed(lblNoRawat.getText());
 
                 if (koneksiDB.AKTIFKANPRINTBARCODEOTOMATIS().equals("aktif")) {
-                    MnCetakBarcodeRawatJalan(TNoRw.getText());
+                    MnCetakBarcodeRawatJalan(lblNoRawat.getText());
                 }
 
                 //kirimsocket
@@ -2718,7 +2726,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                 String datajam = Sequel.cariIsi("select current_date()") + " " + Sequel.cariIsi("select current_time()");
                 JSONObject jsonData = new JSONObject();
                 try {
-                    jsonData.put("NoRawat", TNoRw.getText());
+                    jsonData.put("NoRawat", lblNoRawat.getText());
                     jsonData.put("TaskID", "3"); // Add more fields as needed
                     jsonData.put("WaktuTaskID", datajam);
                 } catch (Exception e) {
@@ -3137,6 +3145,8 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         System.out.println("URL : " + URL);
                         peserta = "";
                         if (nameNode.path("code").asText().equals("200")) {
+                            TNoRw.setText(Sequel.cariIsi("select referensi_mobilejkn_bpjs.no_rawat from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + nosuratkontrol + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+                            lblNoRawat.setText(Sequel.cariIsi("select referensi_mobilejkn_bpjs.no_rawat from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + nosuratkontrol + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
                             response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("peserta");
                             KdPenyakit.setText("Z09.8");
                             NmPenyakit.setText("Z09.8 - Follow-up examination after other treatment for other conditions");
@@ -3230,6 +3240,9 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                             response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("rujukan");
                             KdPenyakit.setText(response.path("diagnosa").path("kode").asText());
                             NmPenyakit.setText(response.path("diagnosa").path("nama").asText());
+
+                            TNoRw.setText(Sequel.cariIsi("select referensi_mobilejkn_bpjs.no_rawat from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + nosuratkontrol + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
+                            lblNoRawat.setText(Sequel.cariIsi("select referensi_mobilejkn_bpjs.no_rawat from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nomorreferensi='" + nosuratkontrol + "' and referensi_mobilejkn_bpjs.status='Belum' and  referensi_mobilejkn_bpjs.tanggalperiksa=CURRENT_DATE()"));
 
                             if (Sequel.cariIsi("SELECT\n"
                                     + "	bridging_sep.jnspelayanan\n"
@@ -3405,7 +3418,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                 jadwalbpjs.tampil(KdPoli.getText(), Valid.SetTgl(TanggalSEP.getSelectedItem() + ""), KdDPJP.getText());
                 String jampraktek = jadwalbpjs.jampraktek;
 
-                //if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs_taskid_status200.no_rawat) from referensi_mobilejkn_bpjs_taskid_status200 where referensi_mobilejkn_bpjs_taskid_status200.no_rawat='" + TNoRw.getText() + "'") == 0) {
+                //if (Sequel.cariInteger("select count(referensi_mobilejkn_bpjs_taskid_status200.no_rawat) from referensi_mobilejkn_bpjs_taskid_status200 where referensi_mobilejkn_bpjs_taskid_status200.no_rawat='" + lblNoRawat.getText() + "'") == 0) {
                 if (!NoSKDP.getText().equals("")) {
                     try {
                         headers = new HttpHeaders();
@@ -3416,7 +3429,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         headers.add("x-signature", api.getHmac(utc));
                         headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
                         requestJson = "{"
-                                + "\"kodebooking\": \"" + TNoRw.getText().replaceAll("/", "") + "\","
+                                + "\"kodebooking\": \"" + lblNoRawat.getText().replaceAll("/", "") + "\","
                                 + "\"jenispasien\": \"JKN\","
                                 + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
                                 + "\"nik\": \"" + NIK.getText() + "\","
@@ -3449,16 +3462,16 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         nameNode = root.path("metadata");
                         if (nameNode.path("code").asText().equals("200")) {
                             Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status200", "?,?,?,?,?,?,?,?", 8, new String[]{
-                                TNoRw.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
+                                lblNoRawat.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
                             });
-                            Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + TNoRw.getText().toString() + "'");
+                            Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + lblNoRawat.getText().toString() + "'");
 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             insertSEP();
                             this.setCursor(Cursor.getDefaultCursor());
                         } else {
                             Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
-                                TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
+                                lblNoRawat.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
                             });
 
                             //hit antrol kedua
@@ -3472,7 +3485,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                                     headers.add("x-signature", api.getHmac(utc));
                                     headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
                                     requestJson = "{"
-                                            + "\"kodebooking\": \"" + TNoRw.getText().replaceAll("/", "") + "\","
+                                            + "\"kodebooking\": \"" + lblNoRawat.getText().replaceAll("/", "") + "\","
                                             + "\"jenispasien\": \"JKN\","
                                             + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
                                             + "\"nik\": \"" + NIK.getText() + "\","
@@ -3506,9 +3519,9 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                                     nameNode = root.path("metadata");
                                     if (nameNode.path("code").asText().equals("200")) {
                                         Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status200", "?,?,?,?,?,?,?,?", 8, new String[]{
-                                            TNoRw.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
+                                            lblNoRawat.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
                                         });
-                                        Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + TNoRw.getText().toString() + "'");
+                                        Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + lblNoRawat.getText().toString() + "'");
 
                                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                         insertSEP();
@@ -3516,7 +3529,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
 
                                     } else {
                                         Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
-                                            TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
+                                            lblNoRawat.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
                                         });
                                     }
                                     System.out.println("respon WS BPJS No Rujuk : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
@@ -3539,7 +3552,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         headers.add("x-signature", api.getHmac(utc));
                         headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
                         requestJson = "{"
-                                + "\"kodebooking\": \"" + TNoRw.getText().replaceAll("/", "") + "\","
+                                + "\"kodebooking\": \"" + lblNoRawat.getText().replaceAll("/", "") + "\","
                                 + "\"jenispasien\": \"JKN\","
                                 + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
                                 + "\"nik\": \"" + NIK.getText() + "\","
@@ -3573,9 +3586,9 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
                         nameNode = root.path("metadata");
                         if (nameNode.path("code").asText().equals("200")) {
                             Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status200", "?,?,?,?,?,?,?,?", 8, new String[]{
-                                TNoRw.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
+                                lblNoRawat.getText(), "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00", "0000-00-00 00:00:00"
                             });
-                            Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + TNoRw.getText().toString() + "'");
+                            Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where no_rawat='" + lblNoRawat.getText().toString() + "'");
 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             insertSEP();
@@ -3583,7 +3596,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog {
 
                         } else {
                             Sequel.menyimpan2("referensi_mobilejkn_bpjs_taskid_status201", "?,?,?", 3, new String[]{
-                                TNoRw.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
+                                lblNoRawat.getText(), nameNode.path("message").asText(), nameNode.path("code").asText()
                             });
                         }
                         System.out.println("respon WS BPJS No Rujuk : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");

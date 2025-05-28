@@ -13,11 +13,8 @@ package khanzahmsanjungan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -27,7 +24,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JTable;
-import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -98,6 +94,8 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
+        jPanel3 = new javax.swing.JPanel();
+        btnKeluar = new component.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -135,6 +133,33 @@ public final class DlgCariPoli extends javax.swing.JDialog {
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
+        jPanel3.setBackground(new java.awt.Color(238, 238, 255));
+        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setPreferredSize(new java.awt.Dimension(615, 45));
+
+        btnKeluar.setForeground(new java.awt.Color(0, 131, 62));
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/reset.png"))); // NOI18N
+        btnKeluar.setMnemonic('K');
+        btnKeluar.setText("Batal");
+        btnKeluar.setToolTipText("Alt+K");
+        btnKeluar.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        btnKeluar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnKeluar.setName("btnKeluar"); // NOI18N
+        btnKeluar.setPreferredSize(new java.awt.Dimension(300, 45));
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
+        btnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnKeluarKeyPressed(evt);
+            }
+        });
+        jPanel3.add(btnKeluar);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,6 +183,16 @@ public final class DlgCariPoli extends javax.swing.JDialog {
 
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void btnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKeluarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnKeluarActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnKeluarKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -176,7 +211,9 @@ public final class DlgCariPoli extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.ScrollPane Scroll;
+    private component.Button btnKeluar;
     private widget.InternalFrame internalFrame1;
+    private javax.swing.JPanel jPanel3;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

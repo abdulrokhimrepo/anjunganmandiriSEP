@@ -871,4 +871,14 @@ public class koneksiDB {
         return var;
     }
 
+    public static String ADDANTROLMOBILEJKN() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("ADDANTROLMOBILEJKN");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
 }

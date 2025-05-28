@@ -16,16 +16,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -81,7 +81,7 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
             } else if (i == 1) {
                 column.setPreferredWidth(140);
             } else if (i == 2) {
-                column.setPreferredWidth(470);
+                column.setPreferredWidth(750);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -169,7 +169,7 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
 
         jLabel16.setText("Keyword");
         jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(120, 23));
+        jLabel16.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass6.add(jLabel16);
 
         diagnosa.setName("diagnosa"); // NOI18N
@@ -343,6 +343,10 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
 
     public JTable getTable() {
         return tbKamar;
+    }
+
+    public void iscek() {
+        diagnosa.requestFocus();
     }
 
 }

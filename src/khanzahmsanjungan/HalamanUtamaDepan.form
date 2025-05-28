@@ -25,7 +25,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-93,0,0,4,52"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-93,0,0,3,-8"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -117,7 +117,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="component.Panel" name="jPanel1">
+    <Container class="component.Panel" name="jPanel4">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ee" red="ee" type="rgb"/>
@@ -136,154 +136,198 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="0"/>
-        <Property name="rows" type="int" value="4"/>
+        <Property name="columns" type="int" value="2"/>
+        <Property name="rows" type="int" value="1"/>
       </Layout>
       <SubComponents>
-        <Component class="widget.ButtonBig" name="btnAdmin10">
+        <Container class="component.Panel" name="jPanel1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/antrianpasien.png"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ee" red="ee" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ANTRIAN PASIEN"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
             </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
+              <Dimension value="[1280, 1024]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin10ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin2">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/kioskselfservice.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="PENDAFTARAN POLIKLINIK"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin2ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin7">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/checkin.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Check-in (UMUM)"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin7ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin8">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/mobilejkn48.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Check-in (MobileJKN)"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin8ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin5">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="PASIEN JKN"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin5ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin6">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="SEP KONTROL"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin6ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin9">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="KONTROL BEDA POLI"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin9ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin11">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/logo-satset.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Aktivasi SatuSehat"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="24" style="1"/>
-            </Property>
-            <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin11ActionPerformed"/>
-          </Events>
-        </Component>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="2"/>
+            <Property name="rows" type="int" value="4"/>
+          </Layout>
+          <SubComponents>
+            <Component class="widget.ButtonBig" name="btnAdmin10">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/antrianpasien.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="ANTRIAN PASIEN"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin10ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin2">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/kioskselfservice.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PENDAFTARAN POLIKLINIK"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin2ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin7">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/checkin.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Check-in (UMUM)"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin7ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin8">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/mobilejkn48.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Check-in (MobileJKN)"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin8ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin5">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PASIEN JKN"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin5ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin6">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SEP KONTROL"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin6ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin9">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="KONTROL BEDA POLI"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin9ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="widget.ButtonBig" name="btnAdmin11">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/48x48/logo-satset.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="AKTIVASI SATUSEHAT MOBILE"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins" size="18" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[50, 0, 50, 0]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 45]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin11ActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

@@ -114,10 +114,16 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                kode_poli = "";
+                // Check if a row is selected in the poli table
+                if (poli.getTable().getSelectedRow() == -1) {
+                    // No row is selected
+                    JOptionPane.showMessageDialog(jPanel1, "Anda belum memilih Poliklinik. Mohon untuk pilih Poliklinik terlebih dahulu!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return; // Exit the method without updating kode_poli and NamaPoli
+                }
+
+                // A row is selected
                 NamaPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(), 1).toString());
                 kode_poli = poli.getTable().getValueAt(poli.getTable().getSelectedRow(), 0).toString();
-
             }
 
             @Override
@@ -148,9 +154,19 @@ public class DlgRegistrasiWalkIn extends javax.swing.JDialog {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                kode_dokter = "";
-                NamaDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 1).toString());
-                kode_dokter = dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 0).toString();
+                // Check if a row is selected in the dokter table
+                if (dokter.getTable().getSelectedRow() == -1) {
+                    // No row is selected
+                    kode_dokter = ""; // Set kode_dokter to an empty string
+                    NamaDokter.setText(""); // Clear the NamaDokter field
+                    JOptionPane.showMessageDialog(jPanel1, "Anda belum memilih dokter. Mohon untuk pilih dokter terlebih dahulu!", "Warning", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    // A row is selected
+                    NamaDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 1).toString());
+                    kode_dokter = dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 0).toString();
+                }
+
+                // Call the tampilPenjab method
                 tampilPenjab();
             }
 

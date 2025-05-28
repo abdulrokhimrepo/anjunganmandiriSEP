@@ -1,28 +1,30 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 package bridging;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.koneksiDB;
+import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.validasi;
-import fungsi.koneksiDB;
-import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -59,7 +61,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
         this.setLocation(10, 2);
         setSize(628, 674);
 
-        Object[] row = {"ICD 10", "Nama Diagnosa", "No.Rujukan", "Kode Tujuan", "Nama Tujuan", "Tgl.Rujukan", "Kode PPK", "Nama PPK", "Status"};
+        Object[] row = {"ICD 10", "Nama Diagnosa", "No.Rujukan", "KdPoli", "Poli Tujuan", "Tgl.Rujukan", "Kode PPK", "Nama PPK", "Status"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -75,27 +77,32 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
         for (i = 0; i < 9; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(75);
             } else if (i == 1) {
-                column.setPreferredWidth(160);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 2) {
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(250);
             } else if (i == 3) {
-                column.setPreferredWidth(70);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 4) {
                 column.setPreferredWidth(200);
             } else if (i == 5) {
                 column.setPreferredWidth(150);
             } else if (i == 6) {
-                column.setPreferredWidth(150);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 7) {
-                column.setPreferredWidth(160);
+                column.setPreferredWidth(200);
             } else if (i == 8) {
                 column.setPreferredWidth(100);
             }
         }
 
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
+        tbKamar.setRowSorter(null);
+
         try {
             link = koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -128,7 +135,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Riwayat Rujukan VClaim ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 131, 62), 5, true), "::[Riwayat Rujukan Aktif VClaim ]::", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 18), new java.awt.Color(0, 131, 62))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -150,17 +157,20 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
+        jLabel16.setForeground(new java.awt.Color(0, 131, 62));
         jLabel16.setText("No.Kartu :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(55, 23));
         panelGlass6.add(jLabel16);
 
         NoKartu.setEditable(false);
+        NoKartu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 131, 62)));
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass6.add(NoKartu);
 
         NamaPasien.setEditable(false);
+        NamaPasien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 131, 62)));
         NamaPasien.setName("NamaPasien"); // NOI18N
         NamaPasien.setPreferredSize(new java.awt.Dimension(350, 23));
         panelGlass6.add(NamaPasien);
@@ -259,16 +269,34 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
             URL = link + "/Rujukan/List/Peserta/" + nomorkartu;
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
+
+            // Get current date for comparison
+            LocalDate currentDate = LocalDate.now();
+
             if (nameNode.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("rujukan");
-                //response = root.path("response").path("rujukan");
                 if (response.isArray()) {
                     for (JsonNode list : response) {
-                        tabMode.addRow(new Object[]{
-                            list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
-                            list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
-                            list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTP"
-                        });
+                        // Parse the visit date
+                        LocalDate visitDate = LocalDate.parse(list.path("tglKunjungan").asText());
+
+                        // Calculate days between visit date and current date
+                        long daysBetween = ChronoUnit.DAYS.between(visitDate, currentDate);
+
+                        // Only add to table if within 89 days
+                        if (daysBetween < 90) {
+                            tabMode.addRow(new Object[]{
+                                list.path("diagnosa").path("kode").asText(),
+                                list.path("diagnosa").path("nama").asText(),
+                                list.path("noKunjungan").asText(),
+                                list.path("poliRujukan").path("kode").asText(),
+                                list.path("poliRujukan").path("nama").asText(),
+                                list.path("tglKunjungan").asText(),
+                                list.path("provPerujuk").path("kode").asText(),
+                                list.path("provPerujuk").path("nama").asText(),
+                                "FKTP"
+                            });
+                        }
                     }
                 }
             }
@@ -286,19 +314,33 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
             nameNode = root.path("metaData");
             if (nameNode.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("rujukan");
-                //response = root.path("response").path("rujukan");
                 if (response.isArray()) {
                     for (JsonNode list : response) {
-                        tabMode.addRow(new Object[]{
-                            list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
-                            list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
-                            list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTL"
-                        });
+                        // Parse the visit date
+                        LocalDate visitDate = LocalDate.parse(list.path("tglKunjungan").asText());
+
+                        // Calculate days between visit date and current date
+                        long daysBetween = ChronoUnit.DAYS.between(visitDate, currentDate);
+
+                        // Only add to table if within 89 days
+                        if (daysBetween < 90) {
+                            tabMode.addRow(new Object[]{
+                                list.path("diagnosa").path("kode").asText(),
+                                list.path("diagnosa").path("nama").asText(),
+                                list.path("noKunjungan").asText(),
+                                list.path("poliRujukan").path("kode").asText(),
+                                list.path("poliRujukan").path("nama").asText(),
+                                list.path("tglKunjungan").asText(),
+                                list.path("provPerujuk").path("kode").asText(),
+                                list.path("provPerujuk").path("nama").asText(),
+                                "FKTL"
+                            });
+                        }
                     }
                 }
             }
             if (tabMode.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Tidak ditemukan rujukan...!!");
+                JOptionPane.showMessageDialog(null, "Tidak ditemukan rujukan aktif...!!");
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : " + ex);
@@ -306,7 +348,6 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
             }
         }
-
         this.setCursor(Cursor.getDefaultCursor());
     }
 

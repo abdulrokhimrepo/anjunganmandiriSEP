@@ -168,7 +168,7 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="30-09-2024"/>
+            <StringItem index="0" value="26-03-2025"/>
           </StringArray>
         </Property>
         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -205,12 +205,12 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" title="VERIFIKASI BIOMETRIK">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder roundedCorners="true" thickness="2">
-                      <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+                    <LineBorder roundedCorners="true" thickness="5">
+                      <Color PropertyName="color" blue="3e" green="83" red="0" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Poppins" size="11" style="1"/>
-                  <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
+                  <Font PropertyName="font" name="Poppins" size="14" style="1"/>
+                  <Color PropertyName="color" blue="3e" green="83" red="0" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -444,7 +444,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="30-09-2024"/>
+                    <StringItem index="0" value="26-03-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -491,7 +491,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="30-09-2024"/>
+                    <StringItem index="0" value="26-03-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1167,7 +1167,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="30-09-2024"/>
+                    <StringItem index="0" value="26-03-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1976,6 +1976,9 @@
             </Component>
             <Component class="widget.Button" name="btnDiagnosaAwal2">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3e" green="83" red="0" type="rgb"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/pilih.png"/>
                 </Property>
@@ -2142,6 +2145,9 @@
             </Component>
             <Component class="widget.Button" name="btnDiagnosaAwal3">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3e" green="83" red="0" type="rgb"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/approvalfp.png"/>
                 </Property>
@@ -2159,12 +2165,15 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1040" y="300" width="190" height="50"/>
+                  <AbsoluteConstraints x="1040" y="300" width="220" height="50"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="widget.Button" name="btnDiagnosaAwal4">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3e" green="83" red="0" type="rgb"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/pengajuan.png"/>
                 </Property>
@@ -2182,7 +2191,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1040" y="240" width="190" height="50"/>
+                  <AbsoluteConstraints x="1040" y="240" width="220" height="50"/>
                 </Constraint>
               </Constraints>
             </Component>
